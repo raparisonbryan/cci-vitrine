@@ -28,10 +28,7 @@ const footerLinks = [
     <div class="container">
       <div class="footer__grid">
         <div class="footer__brand">
-          <div class="footer__logo">
-            <span class="footer__logo-text">CCI</span>
-            <span class="footer__logo-sub">Ivato</span>
-          </div>
+          <img src="../assets/cci_logo_white.png" alt="CCI Ivato" class="footer__img" />
           <p class="footer__desc">
             Centre de Conférences International d'Ivato — votre espace privilégié pour des
             événements d'exception à Madagascar.
@@ -68,7 +65,7 @@ const footerLinks = [
 
 <style scoped>
 .footer {
-  background: var(--color-text);
+  background: var(--color-primary);
   color: #fff;
   padding: 80px 0 0;
 }
@@ -79,22 +76,10 @@ const footerLinks = [
   gap: 48px;
 }
 
-.footer__logo {
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
+.footer__img {
+  height: 100px;
+  object-fit: contain;
   margin-bottom: 16px;
-}
-
-.footer__logo-text {
-  font-size: var(--font-size-lg);
-  font-weight: 800;
-  color: #fff;
-}
-
-.footer__logo-sub {
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.6);
 }
 
 .footer__desc {

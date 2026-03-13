@@ -1,32 +1,43 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { animate, stagger } from 'motion'
 import AppButton from '@/components/AppButton.vue'
+import { Calendar, MoveDown } from 'lucide-vue-next'
 
-const heroRef = ref<HTMLElement | null>(null)
-const heroVisible = ref(false)
+const spaces = [
+  {
+    title: 'Salle plénière',
+    capacity: '800 personnes',
+    desc: "Un espace grand format pour vos conférences et événements d'envergure internationale.",
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
+  },
+  {
+    title: 'Amphithéâtre',
+    capacity: '400 personnes',
+    desc: 'Un amphithéâtre moderne avec gradins et équipements audiovisuels de pointe.',
+    image: 'https://images.unsplash.com/photo-1571624436279-b272aff752b5?w=800&q=80',
+  },
+  {
+    title: 'Salles de réunion',
+    capacity: '20 à 80 personnes',
+    desc: 'Des espaces modulables et équipés pour vos séminaires et réunions professionnelles.',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
+  },
+  {
+    title: 'Espaces exposition',
+    capacity: '1 200 m²',
+    desc: 'De vastes espaces lumineux pour vos foires, expositions et salons professionnels.',
+    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',
+  },
+]
 
-const services = [
-  {
-    icon: '🏛️',
-    title: 'Conférences',
-    desc: 'Des salles modulables équipées des dernières technologies audiovisuelles pour vos conférences internationales.',
-  },
-  {
-    icon: '📋',
-    title: 'Séminaires',
-    desc: 'Des espaces dédiés à la formation et aux séminaires professionnels, dans un cadre propice à la concentration.',
-  },
-  {
-    icon: '🎉',
-    title: 'Événements',
-    desc: "Accueillez vos galas, réceptions et événements d'envergure dans un lieu prestigieux et accessible.",
-  },
-  {
-    icon: '🤝',
-    title: "Réunions d'affaires",
-    desc: 'Des salles de réunion équipées et un service sur mesure pour vos rencontres professionnelles.',
-  },
+const logos = [
+  { abbr: 'UA', name: 'Union Africaine' },
+  { abbr: 'ONU', name: 'Nations Unies' },
+  { abbr: 'COLAS', name: 'Colas Madagascar' },
+  { abbr: 'BNI', name: 'BNI Madagascar' },
+  { abbr: 'AIR', name: 'Air Madagascar' },
+  { abbr: 'OMNIS', name: 'OMNIS' },
+  { abbr: 'OIF', name: 'Francophonie' },
+  { abbr: 'AXIAN', name: 'Axian Group' },
 ]
 
 const stats = [
@@ -35,31 +46,12 @@ const stats = [
   { value: '500+', label: 'Événements accueillis' },
   { value: '1 200', label: 'Places assises' },
 ]
-
-onMounted(() => {
-  heroVisible.value = true
-
-  requestAnimationFrame(() => {
-    const heroContent = heroRef.value?.querySelector('.hero__content')
-    if (heroContent) {
-      const children = Array.from(heroContent.children)
-      animate(
-        children,
-        { opacity: [0, 1], y: [30, 0] },
-        {
-          duration: 0.8,
-          delay: stagger(0.15),
-        },
-      )
-    }
-  })
-})
 </script>
 
 <template>
   <main>
     <!-- Hero -->
-    <section id="hero" ref="heroRef" class="hero" :class="{ 'hero--visible': heroVisible }">
+    <section id="hero" class="hero">
       <div class="hero__overlay" />
       <div class="container hero__container">
         <div class="hero__content">
@@ -70,9 +62,13 @@ onMounted(() => {
             événements internationaux.
           </p>
           <div class="hero__actions">
-            <AppButton href="#contact" variant="primary"> Réserver un espace </AppButton>
+            <AppButton href="#contact" variant="primary">
+              Réserver un espace
+              <Calendar class="icon" />
+            </AppButton>
             <AppButton href="#about" variant="secondary" class="btn--on-dark">
               Découvrir
+              <MoveDown class="icon" />
             </AppButton>
           </div>
         </div>
@@ -106,6 +102,7 @@ onMounted(() => {
           </p>
           <AppButton href="#services" variant="primary" style="margin-top: 24px">
             Voir nos espaces
+            <MoveDown class="icon" />
           </AppButton>
         </div>
       </div>
@@ -140,16 +137,45 @@ onMounted(() => {
           </p>
         </div>
 
-        <div class="services__grid">
+        <div class="spaces__grid">
           <div
-            v-for="(service, i) in services"
-            :key="service.title"
-            class="services__card"
+            v-for="(space, i) in spaces"
+            :key="space.title"
+            class="space-card"
             v-motion-fade="{ delay: i * 0.1 }"
           >
-            <span class="services__icon">{{ service.icon }}</span>
-            <h3 class="services__card-title">{{ service.title }}</h3>
-            <p class="services__card-desc">{{ service.desc }}</p>
+            <div class="space-card__img">
+              <img :src="space.image" :alt="space.title" />
+            </div>
+            <div class="space-card__overlay" />
+            <div class="space-card__body">
+              <span class="space-card__capacity">{{ space.capacity }}</span>
+              <h3 class="space-card__title">{{ space.title }}</h3>
+              <p class="space-card__desc">{{ space.desc }}</p>
+              <span class="space-card__cta">Découvrir →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trusted by -->
+    <section class="trusted">
+      <div class="container">
+        <div class="trusted__header" v-motion-fade>
+          <span class="section-label">Ils nous font confiance</span>
+          <h2 class="section-title">Des organisations de référence</h2>
+        </div>
+        <div class="trusted__marquee" v-motion-fade="{ delay: 0.2 }">
+          <div class="trusted__track">
+            <div
+              v-for="logo in [...logos, ...logos]"
+              :key="logo.name + Math.random()"
+              class="trusted__logo"
+            >
+              <span class="trusted__logo-abbr">{{ logo.abbr }}</span>
+              <span class="trusted__logo-name">{{ logo.name }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -182,28 +208,14 @@ onMounted(() => {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background: url('https://images.unsplash.com/photo-1587825140708-dfaf18c15b78?w=1920&q=80')
-    center/cover no-repeat;
+  background: url('../assets/cci.png') center/cover no-repeat;
   overflow: hidden;
 }
 
 .hero__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.hero--visible .hero__overlay {
-  animation: heroOverlayIn 1.2s ease forwards;
-}
-
-@keyframes heroOverlayIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .hero__container {
@@ -215,7 +227,36 @@ onMounted(() => {
   max-width: 680px;
 }
 
-.hero__content > * {
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.hero__badge {
+  animation: fadeIn 0.2s ease forwards;
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+
+.hero__title {
+  animation: fadeIn 0.2s ease forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+.hero__subtitle {
+  animation: fadeIn 0.2s ease forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+
+.hero__actions {
+  animation: fadeIn 0.4s ease forwards;
+  animation-delay: 0.4s;
   opacity: 0;
 }
 
@@ -233,6 +274,7 @@ onMounted(() => {
 
 .hero__title {
   font-size: clamp(3rem, 8vw, 5rem);
+  font-family: var(--font-title);
   font-weight: 800;
   color: #fff;
   margin-bottom: 20px;
@@ -244,7 +286,8 @@ onMounted(() => {
   max-width: 520px;
   margin-bottom: 36px;
 }
-s .hero__actions {
+
+.hero__actions {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
@@ -274,7 +317,7 @@ s .hero__actions {
 }
 
 .about__image {
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   aspect-ratio: 4/3;
 }
@@ -347,39 +390,191 @@ s .hero__actions {
   margin: 0 auto;
 }
 
-.services__grid {
+.spaces__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
-.services__card {
-  padding: 36px 28px;
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
-  transition: all 0.3s ease;
+.space-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 1/1;
+  cursor: pointer;
 }
 
-.services__card:hover {
-  border-color: var(--color-primary);
-  box-shadow: 0 8px 30px rgba(24, 83, 79, 0.08);
-  transform: translateY(-4px);
+.space-card__img {
+  position: absolute;
+  inset: 0;
 }
 
-.services__icon {
-  font-size: var(--font-size-xl);
-  display: block;
-  margin-bottom: 20px;
+.space-card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.services__card-title {
+.space-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.05) 100%
+  );
+  transition: background 0.4s ease;
+}
+
+.space-card__body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transform: translateY(0);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.space-card__capacity {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.65);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.space-card__title {
+  font-family: var(--font-title);
+  font-size: var(--font-size-lg);
   font-weight: 700;
-  margin-bottom: 12px;
-  color: var(--color-text);
+  color: #fff;
+  line-height: 1.2;
 }
 
-.services__card-desc {
+.space-card__desc {
+  font-size: var(--font-size-xs);
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.35s ease 0.05s,
+    transform 0.35s ease 0.05s;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.space-card__cta {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.35s ease 0.1s,
+    transform 0.35s ease 0.1s;
+  margin-top: 4px;
+}
+
+.space-card:hover .space-card__img img {
+  transform: scale(1.08);
+}
+
+.space-card:hover .space-card__overlay {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.92) 0%,
+    rgba(0, 0, 0, 0.5) 55%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+}
+
+.space-card:hover .space-card__desc,
+.space-card:hover .space-card__cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Trusted by */
+.trusted {
+  padding: 0 0 100px 0;
+  overflow: hidden;
+}
+
+.trusted__header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.trusted__marquee {
+  position: relative;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%);
+}
+
+.trusted__track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.trusted__marquee:hover .trusted__track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.trusted__logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 32px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  white-space: nowrap;
+  transition: all 0.25s ease;
+  cursor: default;
+  flex-shrink: 0;
+}
+
+.trusted__logo:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 20px rgba(24, 83, 79, 0.08);
+}
+
+.trusted__logo-abbr {
+  font-size: var(--font-size-sm);
+  font-weight: 800;
+  color: var(--color-primary);
+  background: rgba(24, 83, 79, 0.08);
+  padding: 6px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.trusted__logo-name {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
   color: var(--color-text-muted);
+  letter-spacing: 0.01em;
 }
 
 /* CTA */
@@ -391,12 +586,13 @@ s .hero__actions {
 .cta__inner {
   text-align: center;
   padding: 80px 40px;
-  border-radius: 16px;
-  background: var(--color-primary);
+  border-radius: var(--radius-lg);
+  background: var(--color-secondary);
 }
 
 .cta__title {
   font-size: var(--font-size-xl);
+  font-family: var(--font-title);
   font-weight: 700;
   color: #fff;
   margin-bottom: 16px;
@@ -417,7 +613,7 @@ s .hero__actions {
 
 .cta__actions .btn-primary {
   background: #fff;
-  color: var(--color-primary);
+  color: var(--color-secondary);
   border-color: #fff;
 }
 
@@ -436,12 +632,6 @@ s .hero__actions {
 }
 
 /* Responsive */
-@media (max-width: 1024px) {
-  .services__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 @media (max-width: 768px) {
   .about__grid {
     grid-template-columns: 1fr;
@@ -453,8 +643,18 @@ s .hero__actions {
     gap: 24px;
   }
 
-  .services__grid {
-    grid-template-columns: 1fr;
+  .spaces__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .space-card {
+    aspect-ratio: 4/5;
+  }
+
+  .space-card__desc,
+  .space-card__cta {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .hero__title {
@@ -463,6 +663,24 @@ s .hero__actions {
 
   .cta__inner {
     padding: 48px 24px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero__badge {
+    font-size: var(--font-size-xs);
+  }
+
+  .hero__subtitle {
+    font-size: var(--font-size-sm);
+  }
+
+  .services__header {
+    text-align: left;
+  }
+
+  .spaces__grid {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 </style>
