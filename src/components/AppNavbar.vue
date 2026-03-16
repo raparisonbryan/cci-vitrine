@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useRoute } from 'vue-router'
 import AppButton from '@/components/AppButton.vue'
 import { Calendar } from 'lucide-vue-next'
 
+const route = useRoute()
 const scrolled = ref(false)
 const mobileMenuOpen = ref(false)
-const burgerDark = computed(() => scrolled.value || mobileMenuOpen.value)
+const isTransparent = computed(() => route.path === '/' && !scrolled.value)
+const burgerDark = computed(() => !isTransparent.value || mobileMenuOpen.value)
 
 function handleScroll() {
   scrolled.value = window.scrollY > 20
@@ -23,24 +26,24 @@ onMounted(() => window.addEventListener('scroll', handleScroll))
 onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 
 const navLinks = [
-  { label: 'À propos', href: '#about' },
-  { label: 'Espaces', href: '#services' },
-  { label: 'Galerie', href: '#gallery' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'À propos', href: '/#about' },
+  { label: 'Espaces', href: '/#services' },
+  { label: 'Galerie', href: '/galerie' },
+  { label: 'Contact', href: '/#contact' },
 ]
 </script>
 
 <template>
-  <header class="navbar" :class="{ 'navbar--scrolled': scrolled }">
+  <header class="navbar" :class="{ 'navbar--scrolled': !isTransparent }">
     <div class="container navbar__inner">
-      <a href="#hero" class="navbar__logo" @click="closeMobileMenu">
+      <a href="/" class="navbar__logo" @click="closeMobileMenu">
         <img
-          v-if="scrolled"
-          src="../assets/cci_logo.png"
+          v-if="isTransparent"
+          src="../assets/cci_logo_white.png"
           alt="CCI Ivato"
           class="navbar__logo-img"
         />
-        <img v-else src="../assets/cci_logo_white.png" alt="CCI Ivato" class="navbar__logo-img" />
+        <img v-else src="../assets/cci_logo.png" alt="CCI Ivato" class="navbar__logo-img" />
       </a>
 
       <!-- menu desktop -->

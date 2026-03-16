@@ -5,14 +5,13 @@ const footerLinks = [
   {
     title: 'Navigation',
     links: [
-      { label: 'Accueil', href: '#hero' },
       { label: 'À propos', href: '#about' },
-      { label: 'Nos espaces', href: '#services' },
+      { label: 'Galerie', href: '/galerie' },
       { label: 'Contact', href: '#contact' },
     ],
   },
   {
-    title: 'Services',
+    title: 'Espaces',
     links: [
       { label: 'Conférences', href: '#services' },
       { label: 'Séminaires', href: '#services' },
@@ -47,10 +46,11 @@ const footerLinks = [
         <div class="footer__col">
           <h4 class="footer__col-title">Contact</h4>
           <ul class="footer__list">
-            <li class="footer__info">Ivato, Antananarivo</li>
-            <li class="footer__info">Madagascar</li>
             <li>
               <a href="mailto:contact@cci-ivato.mg" class="footer__link">contact@cci-ivato.mg</a>
+            </li>
+            <li>
+              <a href="tel:+261000000000" class="footer__link">+261 00 000 00 00</a>
             </li>
           </ul>
         </div>
