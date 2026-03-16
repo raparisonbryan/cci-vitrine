@@ -23,6 +23,9 @@
   --font-size-md: 1.2em;
   --font-size-lg: 1.6em;
   --font-size-xl: 2.2em;
+  --font-size-hero: clamp(3rem, 8vw, 5rem);
+  --font-size-h1: clamp(2.4rem, 6vw, 4rem);
+  --nav-height: 80px;
 }
 
 *,
@@ -44,6 +47,10 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   overflow-x: hidden;
+}
+
+button {
+  font-family: var(--font-family);
 }
 
 img {
@@ -124,6 +131,14 @@ p {
 .section-subtitle {
   color: var(--color-text-muted);
   max-width: 600px;
+}
+
+.section-label {
+  display: inline-block;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 12px;
 }
 
 /* Page transition */

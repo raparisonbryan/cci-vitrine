@@ -273,7 +273,7 @@ const stats = [
 }
 
 .hero__title {
-  font-size: clamp(3rem, 8vw, 5rem);
+  font-size: var(--font-size-hero);
   font-family: var(--font-title);
   font-weight: 800;
   color: #fff;
@@ -331,14 +331,6 @@ const stats = [
 
 .about__image:hover img {
   transform: scale(1.03);
-}
-
-.section-label {
-  display: inline-block;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--color-primary);
-  margin-bottom: 12px;
 }
 
 .about__detail {
