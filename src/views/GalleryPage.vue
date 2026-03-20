@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import { ArrowUpRight, ChevronLeft, ChevronRight, X } from 'lucide-vue-next'
 
-type Category = 'all' | 'pleniere' | 'amphi' | 'reunion' | 'expo'
+type Category = 'all' | 'conference' | 'expo' | 'banquets' | 'bureaux' | 'restaurants' | 'parking'
 
 interface Photo {
   id: number
@@ -14,117 +14,204 @@ interface Photo {
 
 const activeFilter = ref<Category>('all')
 
+const filtersListRef = ref<HTMLDivElement | null>(null)
+
+function scrollFilters(dir: 1 | -1) {
+  const el = filtersListRef.value
+  if (!el) return
+  el.scrollBy({ left: dir * 220, behavior: 'smooth' })
+}
+
 const filters: { key: Category; label: string }[] = [
   { key: 'all', label: 'Tous les espaces' },
-  { key: 'pleniere', label: 'Salle plénière' },
-  { key: 'amphi', label: 'Amphithéâtre' },
-  { key: 'reunion', label: 'Salles de réunion' },
-  { key: 'expo', label: 'Espaces exposition' },
+  { key: 'conference', label: 'Salles de conférence' },
+  { key: 'expo', label: "Espace d'exposition" },
+  { key: 'banquets', label: 'Salles de banquets' },
+  { key: 'bureaux', label: 'Bureaux délégations' },
+  { key: 'restaurants', label: 'Restaurants' },
+  { key: 'parking', label: 'Parking' },
 ]
 
 const photos: Photo[] = [
-  // Salle plénière
+  // Salles de conférence
   {
     id: 1,
-    src: 'https://images.unsplash.com/photo-1509824227185-9c5a01ceba0d?w=800&q=80',
-    alt: 'Salle plénière — vue générale',
-    category: 'pleniere',
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934763/CCI/salles/amphi/amphi_2_raqzt5.jpg',
+    alt: 'Salle de conférence — Amphithéâtre',
+    category: 'conference',
     span: 'wide',
   },
   {
     id: 2,
-    src: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&q=80',
-    alt: 'Salle plénière — scène',
-    category: 'pleniere',
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934762/CCI/salles/amphi/amphi_1_txvun1.jpg',
+    alt: 'Salle de conférence — Amphithéâtre',
+    category: 'conference',
   },
   {
     id: 3,
-    src: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',
-    alt: 'Salle plénière — audience',
-    category: 'pleniere',
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934783/CCI/salles/cristal/cristal_2_o7thks.jpg',
+    alt: 'Salle de conférence — Cristal',
+    category: 'conference',
+    span: 'tall',
   },
   {
     id: 4,
-    src: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&q=80',
-    alt: 'Salle plénière — conférence',
-    category: 'pleniere',
-    span: 'wide',
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934782/CCI/salles/cristal/cristal_1_pgxc3g.jpg',
+    alt: 'Salle de conférence — Cristal',
+    category: 'conference',
   },
-
-  // Amphithéâtre
   {
     id: 5,
-    src: 'https://images.unsplash.com/photo-1571624436279-b272aff752b5?w=1200&q=80',
-    alt: "Amphithéâtre — vue d'ensemble",
-    category: 'amphi',
-    span: 'wide',
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934739/CCI/salles/rubis-emeraude/rubis_1_l6mvsv.jpg',
+    alt: 'Salle de conférence — Rubis / Emeraude',
+    category: 'conference',
   },
   {
     id: 6,
-    src: 'https://images.unsplash.com/photo-1581574919402-5b7d733224d6?w=800&q=80',
-    alt: 'Amphithéâtre — gradins',
-    category: 'amphi',
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934738/CCI/salles/rubis-emeraude/rubis_2_bfyxf5.jpg',
+    alt: 'Salle de conférence — Rubis / Emeraude',
+    category: 'conference',
+    span: 'wide',
   },
+
+  // Espace d'exposition
   {
     id: 7,
-    src: 'https://images.unsplash.com/photo-1509824227185-9c5a01ceba0d?w=800&q=80',
-    alt: 'Amphithéâtre — scène',
-    category: 'amphi',
-  },
-
-  // Salles de réunion
-  {
-    id: 8,
-    src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80',
-    alt: 'Salle de réunion — table',
-    category: 'reunion',
-    span: 'large',
-  },
-  {
-    id: 9,
-    src: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&q=80',
-    alt: 'Salle de réunion — vue globale',
-    category: 'reunion',
-  },
-  {
-    id: 10,
-    src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80',
-    alt: 'Salle de réunion — séminaire',
-    category: 'reunion',
-  },
-  {
-    id: 11,
-    src: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80',
-    alt: 'Salle de réunion — présentation',
-    category: 'reunion',
-    span: 'large',
-  },
-
-  // Espaces exposition
-  {
-    id: 12,
-    src: 'https://images.unsplash.com/photo-1561489413-985b06da5bee?w=1200&q=80',
-    alt: 'Espace exposition — vue générale',
-    category: 'expo',
-  },
-  {
-    id: 13,
-    src: 'https://images.unsplash.com/photo-1551818255-e6e10975bc17?w=800&q=80',
-    alt: 'Espace exposition — stands',
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934486/CCI/hall-couloir/hall_4_roptwe.jpg',
+    alt: "Espace d'exposition — Podium",
     category: 'expo',
     span: 'wide',
   },
   {
-    id: 14,
-    src: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80',
-    alt: 'Espace exposition — salon',
+    id: 8,
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934485/CCI/hall-couloir/hall_1_a4affu.jpg',
+    alt: "Espace d'exposition — Hall",
     category: 'expo',
   },
   {
-    id: 15,
-    src: 'https://images.unsplash.com/photo-1531058020387-3be344556be6?w=800&q=80',
-    alt: 'Espace exposition — foire',
+    id: 9,
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934485/CCI/hall-couloir/hall_2_fkcvp2.jpg',
+    alt: "Espace d'exposition — Hall",
     category: 'expo',
+  },
+  {
+    id: 10,
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934485/CCI/hall-couloir/couloir_1_lrnpfl.jpg',
+    alt: "Espace d'exposition — Couloir",
+    category: 'expo',
+  },
+  {
+    id: 11,
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934485/CCI/hall-couloir/couloir_2_kdhah8.jpg',
+    alt: "Espace d'exposition — Couloir",
+    category: 'expo',
+  },
+
+  // Salles de banquets
+
+  {
+    id: 12,
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934587/CCI/pleniere/pleniere_2_ei4bdq.jpg',
+    alt: 'Salle de banquets — Plenière',
+    category: 'banquets',
+    span: 'large',
+  },
+  {
+    id: 13,
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934588/CCI/pleniere/pleniere_4_i4c7ga.jpg',
+    alt: 'Salle de banquets — Entrée Plenière',
+    category: 'banquets',
+    span: 'tall',
+  },
+  {
+    id: 14,
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934587/CCI/pleniere/pleniere_3_jmsclu.jpg',
+    alt: 'Salle de banquets — Couloir',
+    category: 'banquets',
+  },
+  {
+    id: 15,
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934586/CCI/pleniere/pleniere_1_pygkqw.jpg',
+    alt: 'Salle de banquets — Plenière',
+    category: 'banquets',
+    span: 'wide',
+  },
+
+  // Bureaux délégations
+  {
+    id: 16,
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934818/CCI/saphir-grenat/saphir_2_urn0ch.jpg',
+    alt: 'Bureau délégation — Saphir / Grenat',
+    category: 'bureaux',
+  },
+  {
+    id: 17,
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934817/CCI/saphir-grenat/saphir_1_bpvwhv.jpg',
+    alt: 'Bureau délégation — Saphir / Grenat',
+    category: 'bureaux',
+    span: 'wide',
+  },
+
+  // Restaurants
+  {
+    id: 18,
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934649/CCI/restaurants/quartz/quartz_2_myjibc.jpg',
+    alt: 'Restaurant — Quartz',
+    category: 'restaurants',
+  },
+  {
+    id: 19,
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934649/CCI/restaurants/quartz/quartz_1_gyzb2v.jpg',
+    alt: 'Restaurant — Quartz',
+    category: 'restaurants',
+  },
+  {
+    id: 20,
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934689/CCI/restaurants/zenith/zenith_3_fxksoj.jpg',
+    alt: 'Restaurant — Zenith',
+    category: 'restaurants',
+  },
+  {
+    id: 21,
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934688/CCI/restaurants/zenith/zenith_2_kgi2ua.jpg',
+    alt: 'Restaurant — Zenith',
+    category: 'restaurants',
+    span: 'wide',
+  },
+  {
+    id: 22,
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934687/CCI/restaurants/zenith/zenith_1_idzz6p.jpg',
+    alt: 'Restaurant — Zenith',
+    category: 'restaurants',
+  },
+
+  // Parking
+  {
+    id: 23,
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934549/CCI/parking/parking_vide_2_qizwug.jpg',
+    alt: 'Parking',
+    category: 'parking',
+    span: 'large',
+  },
+  {
+    id: 24,
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934548/CCI/parking/parking_voiture_ctryvs.jpg',
+    alt: 'Parking',
+    category: 'parking',
+    span: 'tall',
+  },
+  {
+    id: 25,
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934546/CCI/parking/parking_drapeau_dmibyo.jpg',
+    alt: 'Parking',
+    category: 'parking',
+  },
+  {
+    id: 26,
+    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934546/CCI/parking/parkin_decor_ftqdyh.jpg',
+    alt: 'Parking',
+    category: 'parking',
+    span: 'wide',
   },
 ]
 
@@ -172,15 +259,35 @@ function navigate(dir: 1 | -1) {
     <!-- Filters -->
     <div class="gallery-filters" v-motion-fade="{ delay: 0.1 }">
       <div class="container">
-        <div class="gallery-filters__list">
+        <div class="gallery-filters__row">
           <button
-            v-for="f in filters"
-            :key="f.key"
-            class="gallery-filter"
-            :class="{ 'gallery-filter--active': activeFilter === f.key }"
-            @click="activeFilter = f.key"
+            class="gallery-filters__arrow gallery-filters__arrow--left"
+            aria-label="Faire défiler vers la gauche"
+            type="button"
+            @click="scrollFilters(-1)"
           >
-            {{ f.label }}
+            <ChevronLeft class="icon" />
+          </button>
+
+          <div class="gallery-filters__list" ref="filtersListRef">
+            <button
+              v-for="f in filters"
+              :key="f.key"
+              class="gallery-filter"
+              :class="{ 'gallery-filter--active': activeFilter === f.key }"
+              @click="activeFilter = f.key"
+            >
+              {{ f.label }}
+            </button>
+          </div>
+
+          <button
+            class="gallery-filters__arrow gallery-filters__arrow--right"
+            aria-label="Faire défiler vers la droite"
+            type="button"
+            @click="scrollFilters(1)"
+          >
+            <ChevronRight class="icon" />
           </button>
         </div>
       </div>
@@ -266,11 +373,75 @@ function navigate(dir: 1 | -1) {
   padding-bottom: 48px;
 }
 
+.gallery-filters__row {
+  position: relative;
+}
+
 .gallery-filters__list {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.gallery-filters__arrow {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .gallery-filters {
+    padding-bottom: 32px;
+  }
+
+  .gallery-filters__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    z-index: 2;
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .gallery-filters__arrow:hover {
+    background: rgba(255, 255, 255, 1);
+  }
+
+  .gallery-filters__arrow--left {
+    left: 0;
+  }
+
+  .gallery-filters__arrow--right {
+    right: 0;
+  }
+
+  .gallery-filters__list {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .gallery-filters__list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery-filter {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
 }
 
 .gallery-filter {
@@ -375,7 +546,7 @@ function navigate(dir: 1 | -1) {
   opacity: 0;
   transform: translateY(6px);
   transition: all 0.25s ease 0.05s;
-  max-width: 220px;
+  max-width: 300px;
 }
 
 .gallery-item:hover img {

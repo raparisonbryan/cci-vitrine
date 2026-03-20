@@ -4,28 +4,46 @@ import { Calendar, MoveDown } from 'lucide-vue-next'
 
 const spaces = [
   {
-    title: 'Salle plénière',
-    capacity: '800 personnes',
+    title: 'Salles de conférence',
+    capacity: 'Amphithéâtre - Emeraude - Rubis - Cristal',
     desc: "Un espace grand format pour vos conférences et événements d'envergure internationale.",
-    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
+    image:
+      'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934762/CCI/salles/amphi/amphi_1_txvun1.jpg',
   },
   {
-    title: 'Amphithéâtre',
-    capacity: '400 personnes',
+    title: "Espace d'exposition",
+    capacity: 'Hall',
     desc: 'Un amphithéâtre moderne avec gradins et équipements audiovisuels de pointe.',
-    image: 'https://images.unsplash.com/photo-1571624436279-b272aff752b5?w=800&q=80',
+    image:
+      'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934485/CCI/hall-couloir/hall_2_fkcvp2.jpg',
   },
   {
-    title: 'Salles de réunion',
-    capacity: '20 à 80 personnes',
+    title: 'Salles de banquets',
+    capacity: 'Plenière',
     desc: 'Des espaces modulables et équipés pour vos séminaires et réunions professionnelles.',
-    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
+    image:
+      'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934587/CCI/pleniere/pleniere_2_ei4bdq.jpg',
   },
   {
-    title: 'Espaces exposition',
-    capacity: '1 200 m²',
+    title: 'Bureaux délégations',
+    capacity: 'Grenat - Saphir',
     desc: 'De vastes espaces lumineux pour vos foires, expositions et salons professionnels.',
-    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',
+    image:
+      'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934817/CCI/saphir-grenat/saphir_1_bpvwhv.jpg',
+  },
+  {
+    title: 'Restaurants',
+    capacity: 'Zenith  - Quartz',
+    desc: 'Un espace élégant en plein air pour vos cocktails, lancements de produits et soirées de gala.',
+    image:
+      'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934688/CCI/restaurants/zenith/zenith_2_kgi2ua.jpg',
+  },
+  {
+    title: 'Parking',
+    capacity: 'Parking',
+    desc: 'Un parking sécurisé pour vos véhicules.',
+    image:
+      'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934549/CCI/parking/parking_vide_2_qizwug.jpg',
   },
 ]
 
@@ -81,7 +99,7 @@ const stats = [
         <div class="about__image-wrap" v-motion-fade-left>
           <div class="about__image">
             <img
-              src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80"
+              src="https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934763/CCI/salles/amphi/amphi_2_raqzt5.jpg"
               alt="Intérieur du CCI Ivato"
             />
           </div>
@@ -208,7 +226,8 @@ const stats = [
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background: url('../assets/cci.png') center/cover no-repeat;
+  background: url('https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773935153/CCI/cci_lfvega.png')
+    center/cover no-repeat;
   overflow: hidden;
 }
 
@@ -394,6 +413,11 @@ const stats = [
   overflow: hidden;
   aspect-ratio: 1/1;
   cursor: pointer;
+}
+
+.space-card--full {
+  grid-column: 1 / -1;
+  aspect-ratio: 1/0.5;
 }
 
 .space-card__img {
