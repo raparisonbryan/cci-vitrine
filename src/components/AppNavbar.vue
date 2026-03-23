@@ -2,12 +2,34 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import AppButton from '@/components/AppButton.vue'
-import { Calendar } from 'lucide-vue-next'
+import {
+  Calendar,
+  ChevronDown,
+  Mic,
+  LayoutGrid,
+  Wine,
+  Briefcase,
+  UtensilsCrossed,
+  Car,
+} from 'lucide-vue-next'
+import { spacesList } from '@/data/spaces'
+
+const spaceIcons: Record<string, ReturnType<typeof Mic>> = {
+  conferences: Mic,
+  exposition: LayoutGrid,
+  banquets: Wine,
+  bureaux: Briefcase,
+  restaurants: UtensilsCrossed,
+  parking: Car,
+}
 
 const route = useRoute()
 const scrolled = ref(false)
 const mobileMenuOpen = ref(false)
-const isTransparent = computed(() => route.path === '/' && !scrolled.value)
+const spacesOpen = ref(false)
+const isTransparent = computed(
+  () => (route.path === '/' || route.meta.transparentNav) && !scrolled.value,
+)
 const burgerDark = computed(() => !isTransparent.value || mobileMenuOpen.value)
 
 function handleScroll() {
@@ -20,44 +42,60 @@ function toggleMobileMenu() {
 
 function closeMobileMenu() {
   mobileMenuOpen.value = false
+  spacesOpen.value = false
 }
 
 onMounted(() => window.addEventListener('scroll', handleScroll))
 onUnmounted(() => window.removeEventListener('scroll', handleScroll))
-
-const navLinks = [
-  { label: 'À propos', href: '/#about' },
-  { label: 'Espaces', href: '/#services' },
-  { label: 'Galerie', href: '/galerie' },
-  { label: 'Contact', href: '/#contact' },
-]
 </script>
 
 <template>
   <header class="navbar" :class="{ 'navbar--scrolled': !isTransparent }">
     <div class="container navbar__inner">
-      <a href="/" class="navbar__logo" @click="closeMobileMenu">
-        <img
-          v-if="isTransparent"
-          src="../assets/cci_logo_white.png"
-          alt="CCI Ivato"
-          class="navbar__logo-img"
-        />
-        <img v-else src="../assets/cci_logo.png" alt="CCI Ivato" class="navbar__logo-img" />
-      </a>
+      <div class="navbar__logo-container">
+        <a href="/" class="navbar__logo" @click="closeMobileMenu">
+          <img
+            v-if="isTransparent"
+            src="../assets/cci_logo_white.png"
+            alt="CCI Ivato"
+            class="navbar__logo-img"
+          />
+          <img v-else src="../assets/cci_logo.png" alt="CCI Ivato" class="navbar__logo-img" />
+        </a>
+        <img class="navbar__logo-madeco" src="../assets/logo-MADECO_SA.png" alt="MADECO SA" />
+      </div>
 
       <!-- menu desktop -->
       <nav class="navbar__nav navbar__nav--desktop">
-        <a
-          v-for="link in navLinks"
-          :key="link.href"
-          :href="link.href"
-          class="navbar__link"
-          @click="closeMobileMenu"
-        >
-          {{ link.label }}
-        </a>
-        <AppButton href="#contact" variant="primary" @click="closeMobileMenu">
+        <a href="/" class="navbar__link">Accueil</a>
+
+        <a href="/a-propos" class="navbar__link">À propos</a>
+
+        <div class="navbar__dropdown">
+          <span class="navbar__link navbar__link--dropdown">
+            Espaces
+            <ChevronDown class="navbar__chevron" />
+          </span>
+          <div class="navbar__dropdown-menu">
+            <a
+              v-for="space in spacesList"
+              :key="space.slug"
+              :href="`/espaces/${space.slug}`"
+              class="navbar__dropdown-link"
+            >
+              <div class="navbar__dropdown-icon_wrapper">
+                <component :is="spaceIcons[space.slug]" class="navbar__dropdown-icon" />
+              </div>
+              <div class="navbar__dropdown-text">
+                <span>{{ space.name }}</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <a href="/galerie" class="navbar__link">Galerie</a>
+
+        <AppButton href="#contact" variant="primary">
           Réserver
           <Calendar class="icon" />
         </AppButton>
@@ -66,15 +104,32 @@ const navLinks = [
       <!-- menu mobile -->
       <Teleport to="body">
         <nav class="navbar__nav--mobile" :class="{ 'navbar__nav--mobile-open': mobileMenuOpen }">
-          <a
-            v-for="link in navLinks"
-            :key="link.href"
-            :href="link.href"
-            class="mobile-link"
-            @click="closeMobileMenu"
+          <a href="/" class="mobile-link" @click="closeMobileMenu">Accueil</a>
+
+          <a href="/a-propos" class="mobile-link" @click="closeMobileMenu">À propos</a>
+
+          <button
+            class="mobile-link mobile-link--toggle"
+            type="button"
+            @click="spacesOpen = !spacesOpen"
           >
-            {{ link.label }}
-          </a>
+            Espaces
+            <ChevronDown class="mobile-chevron" :class="{ 'mobile-chevron--open': spacesOpen }" />
+          </button>
+          <div class="mobile-spaces" :class="{ 'mobile-spaces--open': spacesOpen }">
+            <a
+              v-for="space in spacesList"
+              :key="space.slug"
+              :href="`/espaces/${space.slug}`"
+              class="mobile-spaces__link"
+              @click="closeMobileMenu"
+            >
+              {{ space.name }}
+            </a>
+          </div>
+
+          <a href="/galerie" class="mobile-link" @click="closeMobileMenu">Galerie</a>
+
           <AppButton href="#contact" variant="primary" @click="closeMobileMenu">
             Réserver
             <Calendar class="icon" />
@@ -119,6 +174,12 @@ const navLinks = [
   justify-content: space-between;
 }
 
+.navbar__logo-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 .navbar__logo {
   height: 80px;
 }
@@ -126,6 +187,11 @@ const navLinks = [
 .navbar__logo-img {
   width: 100%;
   height: 100%;
+  object-fit: contain;
+}
+
+.navbar__logo-madeco {
+  height: 60px;
   object-fit: contain;
 }
 
@@ -177,6 +243,114 @@ const navLinks = [
   background: #fff;
 }
 
+/* Dropdown – desktop */
+.navbar__link--dropdown {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.navbar__chevron {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s ease;
+}
+
+.navbar__dropdown {
+  position: relative;
+}
+
+.navbar__dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  min-width: 260px;
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  padding: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.navbar__dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -16px;
+  left: 0;
+  right: 0;
+  height: 16px;
+}
+
+.navbar__dropdown:hover .navbar__dropdown-menu {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(-50%) translateY(0);
+}
+
+.navbar__dropdown:hover .navbar__chevron {
+  transform: rotate(180deg);
+}
+
+.navbar__dropdown-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px 10px 4px;
+  border-radius: var(--radius);
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: var(--font-size-sm);
+  transition: all 0.15s ease;
+}
+
+.navbar__dropdown-link:hover {
+  background: var(--color-bg-subtle);
+  color: var(--color-primary);
+}
+
+.navbar__dropdown-icon_wrapper {
+  background: var(--color-bg-subtle);
+  padding: 8px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar__dropdown-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  transition: color 0.15s ease;
+}
+
+.navbar__dropdown-link:hover .navbar__dropdown-icon {
+  color: var(--color-primary);
+}
+
+.navbar__dropdown-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.navbar__dropdown-rooms {
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.navbar__dropdown-link:hover .navbar__dropdown-rooms {
+  color: var(--color-secondary);
+}
+
+/* Burger */
 .navbar__burger {
   display: none;
   flex-direction: column;
@@ -209,7 +383,12 @@ const navLinks = [
   transform: translateY(-3.5px) rotate(-45deg);
 }
 
-@media (max-width: 768px) {
+/* Menu mobile */
+.navbar__nav--mobile {
+  display: none;
+}
+
+@media (max-width: 1024px) {
   .navbar__burger {
     display: flex;
     z-index: 1001;
@@ -227,23 +406,15 @@ const navLinks = [
   .navbar__nav--desktop {
     display: none;
   }
-}
 
-/* menu mobile */
-.navbar__nav--mobile {
-  display: none;
-}
-
-@media (max-width: 768px) {
   .navbar__nav--mobile {
     display: flex;
     position: fixed;
     inset: 0;
     background: #fff;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    gap: 32px;
+    padding: 0 24px;
     z-index: 999;
     opacity: 0;
     pointer-events: none;
@@ -260,26 +431,67 @@ const navLinks = [
   }
 
   .mobile-link {
+    margin-bottom: 24px;
     font-size: var(--font-size-lg);
     font-weight: 500;
     color: var(--color-text);
     position: relative;
     text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-family);
   }
 
-  .mobile-link::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--color-primary);
-    transition: width 0.25s ease;
+  .mobile-link--toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
   }
 
-  .mobile-link:hover::after {
-    width: 100%;
+  .mobile-chevron {
+    width: 18px;
+    height: 18px;
+    color: var(--color-text-muted);
+    transition: transform 0.25s ease;
+  }
+
+  .mobile-chevron--open {
+    transform: rotate(180deg);
+  }
+
+  .mobile-spaces {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .mobile-spaces--open {
+    max-height: 400px;
+    padding-bottom: 24px;
+  }
+
+  .mobile-spaces__link {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    font-weight: 500;
+    transition: color 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+  }
+
+  .mobile-spaces__link:hover {
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 768px) {
+    .navbar__logo-madeco {
+      display: none;
+    }
   }
 }
 </style>

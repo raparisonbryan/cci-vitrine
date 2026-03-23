@@ -1,51 +1,11 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import AppButton from '@/components/AppButton.vue'
+import AppCta from '@/components/AppCta.vue'
+import { spacesList } from '@/data/spaces'
 import { Calendar, MoveDown } from 'lucide-vue-next'
 
-const spaces = [
-  {
-    title: 'Salles de conférence',
-    capacity: 'Amphithéâtre - Emeraude - Rubis - Cristal',
-    desc: "Un espace grand format pour vos conférences et événements d'envergure internationale.",
-    image:
-      'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934762/CCI/salles/amphi/amphi_1_txvun1.jpg',
-  },
-  {
-    title: "Espace d'exposition",
-    capacity: 'Hall',
-    desc: 'Un amphithéâtre moderne avec gradins et équipements audiovisuels de pointe.',
-    image:
-      'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934485/CCI/hall-couloir/hall_2_fkcvp2.jpg',
-  },
-  {
-    title: 'Salles de banquets',
-    capacity: 'Plenière',
-    desc: 'Des espaces modulables et équipés pour vos séminaires et réunions professionnelles.',
-    image:
-      'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934587/CCI/pleniere/pleniere_2_ei4bdq.jpg',
-  },
-  {
-    title: 'Bureaux délégations',
-    capacity: 'Grenat - Saphir',
-    desc: 'De vastes espaces lumineux pour vos foires, expositions et salons professionnels.',
-    image:
-      'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934817/CCI/saphir-grenat/saphir_1_bpvwhv.jpg',
-  },
-  {
-    title: 'Restaurants',
-    capacity: 'Zenith  - Quartz',
-    desc: 'Un espace élégant en plein air pour vos cocktails, lancements de produits et soirées de gala.',
-    image:
-      'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934688/CCI/restaurants/zenith/zenith_2_kgi2ua.jpg',
-  },
-  {
-    title: 'Parking',
-    capacity: 'Parking',
-    desc: 'Un parking sécurisé pour vos véhicules.',
-    image:
-      'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934549/CCI/parking/parking_vide_2_qizwug.jpg',
-  },
-]
+const router = useRouter()
 
 const logos = [
   { abbr: 'UA', name: 'Union Africaine' },
@@ -59,11 +19,15 @@ const logos = [
 ]
 
 const stats = [
-  { value: '5 000', label: "m² d'espaces" },
-  { value: '3', label: 'Salles de conférence' },
+  { value: '6', label: "Types d'espaces" },
+  { value: '4', label: 'Salles de conférence' },
   { value: '500+', label: 'Événements accueillis' },
-  { value: '1 200', label: 'Places assises' },
+  { value: '5 minutes', label: "Distance de l'aéroport" },
 ]
+
+function goToSpace(slug: string) {
+  void router.push({ name: 'space', params: { slug } })
+}
 </script>
 
 <template>
@@ -157,19 +121,24 @@ const stats = [
 
         <div class="spaces__grid">
           <div
-            v-for="(space, i) in spaces"
-            :key="space.title"
+            v-for="(space, i) in spacesList"
+            :key="space.slug"
             class="space-card"
+            role="link"
+            tabindex="0"
             v-motion-fade="{ delay: i * 0.1 }"
+            @click="goToSpace(space.slug)"
+            @keydown.enter.prevent="goToSpace(space.slug)"
+            @keydown.space.prevent="goToSpace(space.slug)"
           >
             <div class="space-card__img">
-              <img :src="space.image" :alt="space.title" />
+              <img :src="space.card.image" :alt="space.name" />
             </div>
             <div class="space-card__overlay" />
             <div class="space-card__body">
-              <span class="space-card__capacity">{{ space.capacity }}</span>
-              <h3 class="space-card__title">{{ space.title }}</h3>
-              <p class="space-card__desc">{{ space.desc }}</p>
+              <span class="space-card__capacity">{{ space.card.rooms }}</span>
+              <h3 class="space-card__title">{{ space.name }}</h3>
+              <p class="space-card__desc">{{ space.card.desc }}</p>
               <span class="space-card__cta">Découvrir →</span>
             </div>
           </div>
@@ -200,22 +169,7 @@ const stats = [
     </section>
 
     <!-- CTA -->
-    <section id="contact" class="cta">
-      <div class="container cta__container" v-motion-scale>
-        <div class="cta__inner">
-          <h2 class="cta__title">Prêt à organiser votre événement ?</h2>
-          <p class="cta__desc">
-            Contactez-nous pour discuter de votre projet et réserver votre espace au CCI Ivato.
-          </p>
-          <div class="cta__actions">
-            <AppButton href="mailto:contact@cci-ivato.mg" variant="primary">
-              Nous contacter
-            </AppButton>
-            <AppButton href="tel:+261000000000" variant="secondary"> +261 00 000 00 00 </AppButton>
-          </div>
-        </div>
-      </div>
-    </section>
+    <AppCta />
   </main>
 </template>
 
@@ -415,6 +369,11 @@ const stats = [
   cursor: pointer;
 }
 
+.space-card:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
 .space-card--full {
   grid-column: 1 / -1;
   aspect-ratio: 1/0.5;
@@ -593,60 +552,6 @@ const stats = [
   letter-spacing: 0.01em;
 }
 
-/* CTA */
-.cta {
-  padding: var(--section-padding);
-  background: var(--color-bg-subtle);
-}
-
-.cta__inner {
-  text-align: center;
-  padding: 80px 40px;
-  border-radius: var(--radius-lg);
-  background: var(--color-secondary);
-}
-
-.cta__title {
-  font-size: var(--font-size-xl);
-  font-family: var(--font-title);
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 16px;
-}
-
-.cta__desc {
-  color: rgba(255, 255, 255, 0.75);
-  max-width: 480px;
-  margin: 0 auto 32px;
-}
-
-.cta__actions {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.cta__actions .btn-primary {
-  background: #fff;
-  color: var(--color-secondary);
-  border-color: #fff;
-}
-
-.cta__actions .btn-primary:hover {
-  background: rgba(255, 255, 255, 0.9);
-}
-
-.cta__actions .btn-secondary {
-  border-color: rgba(255, 255, 255, 0.4);
-  color: #fff;
-}
-
-.cta__actions .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.6);
-}
-
 /* Responsive */
 @media (max-width: 768px) {
   .about__grid {
@@ -675,10 +580,6 @@ const stats = [
 
   .hero__title {
     font-size: var(--font-size-xl);
-  }
-
-  .cta__inner {
-    padding: 48px 24px;
   }
 }
 

@@ -15,9 +15,9 @@ const showSplash = computed(() => route.path === '/' && !splashDone.value)
   <SplashScreen v-if="showSplash" @complete="splashDone = true" />
   <template v-else>
     <AppNavbar />
-    <RouterView v-slot="{ Component }">
+    <RouterView v-slot="{ Component, route }">
       <Transition name="page" mode="out-in">
-        <component :is="Component" />
+        <component :is="Component" :key="route.path" />
       </Transition>
     </RouterView>
     <AppFooter />

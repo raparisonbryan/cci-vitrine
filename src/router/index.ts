@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/views/HomePage.vue'
 import GalleryPage from '@/views/GalleryPage.vue'
+import SpacePage from '@/views/SpacePage.vue'
+import { spaces } from '@/data/spaces'
+import AProposPage from '@/views/AProposPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,6 +17,22 @@ const router = createRouter({
       path: '/galerie',
       name: 'gallery',
       component: GalleryPage,
+    },
+    {
+      path: '/a-propos',
+      name: 'a-propos',
+      component: AProposPage,
+    },
+    {
+      path: '/espaces/:slug',
+      name: 'space',
+      component: SpacePage,
+      meta: { transparentNav: true },
+      beforeEnter(to) {
+        if (!((to.params.slug as string) in spaces)) {
+          return { name: 'home' }
+        }
+      },
     },
   ],
   scrollBehavior(to) {

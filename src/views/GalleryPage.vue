@@ -1,18 +1,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { ArrowUpRight, ChevronLeft, ChevronRight, X } from 'lucide-vue-next'
+import { allGalleryPhotos, galleryFilters, type GalleryPhoto } from '@/data/spaces'
 
-type Category = 'all' | 'conference' | 'expo' | 'banquets' | 'bureaux' | 'restaurants' | 'parking'
-
-interface Photo {
-  id: number
-  src: string
-  alt: string
-  category: Exclude<Category, 'all'>
-  span?: 'wide' | 'tall' | 'large'
-}
-
-const activeFilter = ref<Category>('all')
+const activeFilter = ref('all')
 
 const filtersListRef = ref<HTMLDivElement | null>(null)
 
@@ -22,206 +13,15 @@ function scrollFilters(dir: 1 | -1) {
   el.scrollBy({ left: dir * 220, behavior: 'smooth' })
 }
 
-const filters: { key: Category; label: string }[] = [
-  { key: 'all', label: 'Tous les espaces' },
-  { key: 'conference', label: 'Salles de conférence' },
-  { key: 'expo', label: "Espace d'exposition" },
-  { key: 'banquets', label: 'Salles de banquets' },
-  { key: 'bureaux', label: 'Bureaux délégations' },
-  { key: 'restaurants', label: 'Restaurants' },
-  { key: 'parking', label: 'Parking' },
-]
-
-const photos: Photo[] = [
-  // Salles de conférence
-  {
-    id: 1,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934763/CCI/salles/amphi/amphi_2_raqzt5.jpg',
-    alt: 'Salle de conférence — Amphithéâtre',
-    category: 'conference',
-    span: 'wide',
-  },
-  {
-    id: 2,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934762/CCI/salles/amphi/amphi_1_txvun1.jpg',
-    alt: 'Salle de conférence — Amphithéâtre',
-    category: 'conference',
-  },
-  {
-    id: 3,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934783/CCI/salles/cristal/cristal_2_o7thks.jpg',
-    alt: 'Salle de conférence — Cristal',
-    category: 'conference',
-    span: 'tall',
-  },
-  {
-    id: 4,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934782/CCI/salles/cristal/cristal_1_pgxc3g.jpg',
-    alt: 'Salle de conférence — Cristal',
-    category: 'conference',
-  },
-  {
-    id: 5,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934739/CCI/salles/rubis-emeraude/rubis_1_l6mvsv.jpg',
-    alt: 'Salle de conférence — Rubis / Emeraude',
-    category: 'conference',
-  },
-  {
-    id: 6,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934738/CCI/salles/rubis-emeraude/rubis_2_bfyxf5.jpg',
-    alt: 'Salle de conférence — Rubis / Emeraude',
-    category: 'conference',
-    span: 'wide',
-  },
-
-  // Espace d'exposition
-  {
-    id: 7,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934486/CCI/hall-couloir/hall_4_roptwe.jpg',
-    alt: "Espace d'exposition — Podium",
-    category: 'expo',
-    span: 'wide',
-  },
-  {
-    id: 8,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934485/CCI/hall-couloir/hall_1_a4affu.jpg',
-    alt: "Espace d'exposition — Hall",
-    category: 'expo',
-  },
-  {
-    id: 9,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934485/CCI/hall-couloir/hall_2_fkcvp2.jpg',
-    alt: "Espace d'exposition — Hall",
-    category: 'expo',
-  },
-  {
-    id: 10,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934485/CCI/hall-couloir/couloir_1_lrnpfl.jpg',
-    alt: "Espace d'exposition — Couloir",
-    category: 'expo',
-  },
-  {
-    id: 11,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934485/CCI/hall-couloir/couloir_2_kdhah8.jpg',
-    alt: "Espace d'exposition — Couloir",
-    category: 'expo',
-  },
-
-  // Salles de banquets
-
-  {
-    id: 12,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934587/CCI/pleniere/pleniere_2_ei4bdq.jpg',
-    alt: 'Salle de banquets — Plenière',
-    category: 'banquets',
-    span: 'large',
-  },
-  {
-    id: 13,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934588/CCI/pleniere/pleniere_4_i4c7ga.jpg',
-    alt: 'Salle de banquets — Entrée Plenière',
-    category: 'banquets',
-    span: 'tall',
-  },
-  {
-    id: 14,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934587/CCI/pleniere/pleniere_3_jmsclu.jpg',
-    alt: 'Salle de banquets — Couloir',
-    category: 'banquets',
-  },
-  {
-    id: 15,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934586/CCI/pleniere/pleniere_1_pygkqw.jpg',
-    alt: 'Salle de banquets — Plenière',
-    category: 'banquets',
-    span: 'wide',
-  },
-
-  // Bureaux délégations
-  {
-    id: 16,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934818/CCI/saphir-grenat/saphir_2_urn0ch.jpg',
-    alt: 'Bureau délégation — Saphir / Grenat',
-    category: 'bureaux',
-  },
-  {
-    id: 17,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934817/CCI/saphir-grenat/saphir_1_bpvwhv.jpg',
-    alt: 'Bureau délégation — Saphir / Grenat',
-    category: 'bureaux',
-    span: 'wide',
-  },
-
-  // Restaurants
-  {
-    id: 18,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934649/CCI/restaurants/quartz/quartz_2_myjibc.jpg',
-    alt: 'Restaurant — Quartz',
-    category: 'restaurants',
-  },
-  {
-    id: 19,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934649/CCI/restaurants/quartz/quartz_1_gyzb2v.jpg',
-    alt: 'Restaurant — Quartz',
-    category: 'restaurants',
-  },
-  {
-    id: 20,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934689/CCI/restaurants/zenith/zenith_3_fxksoj.jpg',
-    alt: 'Restaurant — Zenith',
-    category: 'restaurants',
-  },
-  {
-    id: 21,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934688/CCI/restaurants/zenith/zenith_2_kgi2ua.jpg',
-    alt: 'Restaurant — Zenith',
-    category: 'restaurants',
-    span: 'wide',
-  },
-  {
-    id: 22,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934687/CCI/restaurants/zenith/zenith_1_idzz6p.jpg',
-    alt: 'Restaurant — Zenith',
-    category: 'restaurants',
-  },
-
-  // Parking
-  {
-    id: 23,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934549/CCI/parking/parking_vide_2_qizwug.jpg',
-    alt: 'Parking',
-    category: 'parking',
-    span: 'large',
-  },
-  {
-    id: 24,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934548/CCI/parking/parking_voiture_ctryvs.jpg',
-    alt: 'Parking',
-    category: 'parking',
-    span: 'tall',
-  },
-  {
-    id: 25,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934546/CCI/parking/parking_drapeau_dmibyo.jpg',
-    alt: 'Parking',
-    category: 'parking',
-  },
-  {
-    id: 26,
-    src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934546/CCI/parking/parkin_decor_ftqdyh.jpg',
-    alt: 'Parking',
-    category: 'parking',
-    span: 'wide',
-  },
-]
-
-const filtered = computed<Photo[]>(() =>
-  activeFilter.value === 'all' ? photos : photos.filter((p) => p.category === activeFilter.value),
+const filtered = computed<GalleryPhoto[]>(() =>
+  activeFilter.value === 'all'
+    ? allGalleryPhotos
+    : allGalleryPhotos.filter((p) => p.category === activeFilter.value),
 )
 
-const lightbox = ref<Photo | null>(null)
+const lightbox = ref<GalleryPhoto | null>(null)
 
-function openLightbox(photo: Photo) {
+function openLightbox(photo: GalleryPhoto) {
   lightbox.value = photo
   document.body.style.overflow = 'hidden'
 }
@@ -271,7 +71,7 @@ function navigate(dir: 1 | -1) {
 
           <div class="gallery-filters__list" ref="filtersListRef">
             <button
-              v-for="f in filters"
+              v-for="f in galleryFilters"
               :key="f.key"
               class="gallery-filter"
               :class="{ 'gallery-filter--active': activeFilter === f.key }"
