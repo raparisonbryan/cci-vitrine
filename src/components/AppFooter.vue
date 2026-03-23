@@ -5,18 +5,21 @@ const footerLinks = [
   {
     title: 'Navigation',
     links: [
+      { label: 'Accueil', href: '/' },
       { label: 'À propos', href: '#about' },
       { label: 'Galerie', href: '/galerie' },
-      { label: 'Contact', href: '#contact' },
+      { label: 'Reserver', href: '#contact' },
     ],
   },
   {
     title: 'Espaces',
     links: [
-      { label: 'Conférences', href: '#services' },
-      { label: 'Séminaires', href: '#services' },
-      { label: 'Événements', href: '#services' },
-      { label: 'Réceptions', href: '#services' },
+      { label: 'Salles de conférence', href: '/espaces/conferences' },
+      { label: "Espaces d'exposition", href: '/espaces/exposition' },
+      { label: 'Salle de banquets', href: '/espaces/banquets' },
+      { label: 'Bureaux délégations', href: '/espaces/bureaux' },
+      { label: 'Restaurants', href: '/espaces/restaurants' },
+      { label: 'Parking', href: '/espaces/parking' },
     ],
   },
 ]
@@ -27,7 +30,10 @@ const footerLinks = [
     <div class="container">
       <div class="footer__grid">
         <div class="footer__brand">
-          <img src="../assets/cci_logo_white.png" alt="CCI Ivato" class="footer__img" />
+          <div class="footer__brand-container">
+            <img src="../assets/cci_logo_white.png" alt="CCI Ivato" class="footer__img" />
+            <img src="../assets/logo-MADECO_SA.png" alt="MADECO SA" class="footer__img-madeco" />
+          </div>
           <p class="footer__desc">
             Centre de Conférences International d'Ivato — votre espace privilégié pour des
             événements d'exception à Madagascar.
@@ -82,6 +88,18 @@ const footerLinks = [
   margin-bottom: 16px;
 }
 
+.footer__brand-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer__img-madeco {
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 16px;
+}
+
 .footer__desc {
   font-size: var(--font-size-xs);
   color: rgba(255, 255, 255, 0.6);
@@ -128,7 +146,23 @@ const footerLinks = [
   color: rgba(255, 255, 255, 0.4);
 }
 
+@media (max-width: 1024px) {
+  .footer__img {
+    margin-bottom: 0;
+  }
+
+  .footer__brand-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
 @media (max-width: 768px) {
+  .footer__brand-container {
+    flex-direction: row;
+    align-items: center;
+  }
+
   .footer__grid {
     grid-template-columns: 1fr;
     gap: 40px;
