@@ -678,6 +678,7 @@ function navigateTo(path: string) {
 }
 
 .space-specs__cta-actions .btn-primary {
+  font-size: var(--font-size-sm);
   background: #fff;
   color: var(--color-secondary);
   border-color: #fff;
