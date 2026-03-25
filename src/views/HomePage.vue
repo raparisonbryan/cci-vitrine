@@ -44,7 +44,7 @@ function goToSpace(slug: string) {
             événements internationaux.
           </p>
           <div class="hero__actions">
-            <AppButton href="#contact" variant="primary">
+            <AppButton href="/contact" variant="primary">
               Réserver un espace
               <Calendar class="icon" />
             </AppButton>

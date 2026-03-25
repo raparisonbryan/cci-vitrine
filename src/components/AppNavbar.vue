@@ -95,7 +95,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 
         <a href="/galerie" class="navbar__link">Galerie</a>
 
-        <AppButton href="#contact" variant="primary">
+        <AppButton href="/contact" variant="primary">
           Réserver
           <Calendar class="icon" />
         </AppButton>
@@ -130,7 +130,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 
           <a href="/galerie" class="mobile-link" @click="closeMobileMenu">Galerie</a>
 
-          <AppButton href="#contact" variant="primary" @click="closeMobileMenu">
+          <AppButton href="/contact" variant="primary" @click="closeMobileMenu">
             Réserver
             <Calendar class="icon" />
           </AppButton>
