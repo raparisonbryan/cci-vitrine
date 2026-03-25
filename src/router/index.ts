@@ -4,6 +4,7 @@ import GalleryPage from '@/views/GalleryPage.vue'
 import SpacePage from '@/views/SpacePage.vue'
 import { spaces } from '@/data/spaces'
 import AProposPage from '@/views/AProposPage.vue'
+import ContactPage from '@/views/ContactPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,6 +23,11 @@ const router = createRouter({
       path: '/a-propos',
       name: 'a-propos',
       component: AProposPage,
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      component: ContactPage,
     },
     {
       path: '/espaces/:slug',

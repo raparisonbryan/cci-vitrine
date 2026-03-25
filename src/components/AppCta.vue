@@ -35,7 +35,7 @@ function navigateTo(path: string) {
             Réserver un espace
             <Calendar class="cta__icon" />
           </AppButton>
-          <AppButton href="tel:+261000000000" variant="secondary"> +261 00 000 00 00 </AppButton>
+          <AppButton href="tel:+261320362300" variant="secondary"> +261 32 03 623 00 </AppButton>
         </div>
       </div>
     </div>

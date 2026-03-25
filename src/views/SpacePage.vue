@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import {
   Calendar,
   MoveDown,
@@ -43,6 +43,7 @@ const specIcons: Record<string, FunctionalComponent> = {
 }
 
 const route = useRoute()
+const router = useRouter()
 const space = computed(() => spaces[route.params.slug as string])
 const hasMultipleRooms = computed(() => space.value && space.value.rooms.length > 1)
 
@@ -79,6 +80,10 @@ function navigateLightbox(dir: 1 | -1) {
   const idx = list.findIndex((p) => p.id === lightbox.value!.id)
   const next = (idx + dir + list.length) % list.length
   lightbox.value = list[next] ?? null
+}
+
+function navigateTo(path: string) {
+  void router.push(path)
 }
 </script>
 
@@ -168,11 +173,12 @@ function navigateLightbox(dir: 1 | -1) {
                 Contactez-nous pour discuter de votre projet et réserver votre espace au CCI Ivato.
               </p>
               <div class="space-specs__cta-actions">
-                <AppButton href="mailto:contact@cci-ivato.mg" variant="primary">
-                  Nous contacter
+                <AppButton @click="navigateTo('/contact')" variant="primary">
+                  Réserver un espace
+                  <Calendar class="cta__icon" />
                 </AppButton>
-                <AppButton href="tel:+261000000000" variant="secondary">
-                  +261 00 000 00 00
+                <AppButton href="tel:+261320362300" variant="secondary">
+                  +261 32 03 623 00
                 </AppButton>
               </div>
             </div>
@@ -642,6 +648,12 @@ function navigateLightbox(dir: 1 | -1) {
   text-align: center;
   position: sticky;
   top: 120px;
+}
+
+.cta__icon {
+  color: var(--color-secondary);
+  width: var(--font-size-sm);
+  height: var(--font-size-sm);
 }
 
 .space-specs__cta-title {

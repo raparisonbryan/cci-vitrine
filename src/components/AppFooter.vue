@@ -53,7 +53,9 @@ const footerLinks = [
           <h4 class="footer__col-title">Contact</h4>
           <ul class="footer__list">
             <li>
-              <a href="mailto:contact@cci-ivato.mg" class="footer__link">contact@cci-ivato.mg</a>
+              <a href="mailto:commercial.cci@madeco.mg" class="footer__link"
+                >commercial.cci@madeco.mg</a
+              >
             </li>
             <li>
               <a href="tel:+261000000000" class="footer__link">+261 00 000 00 00</a>
