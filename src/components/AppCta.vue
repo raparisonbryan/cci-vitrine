@@ -83,6 +83,7 @@ function navigateTo(path: string) {
 }
 
 .cta__actions .btn-primary {
+  font-size: var(--font-size-sm);
   background: #fff;
   color: var(--color-secondary);
   border-color: #fff;
@@ -93,6 +94,7 @@ function navigateTo(path: string) {
 }
 
 .cta__actions .btn-secondary {
+  font-size: var(--font-size-sm);
   border-color: rgba(255, 255, 255, 0.4);
   color: #fff;
 }

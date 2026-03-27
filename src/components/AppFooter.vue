@@ -35,8 +35,8 @@ const footerLinks = [
             <img src="../assets/logo-MADECO_SA.png" alt="MADECO SA" class="footer__img-madeco" />
           </div>
           <p class="footer__desc">
-            Centre de Conférences International d'Ivato — votre espace privilégié pour des
-            événements d'exception à Madagascar.
+            Un espace d'exception au cœur d’Antananarivo pour vos conférences, séminaires, sorties
+            de promotion, événements internationaux ou familiaux.
           </p>
         </div>
 

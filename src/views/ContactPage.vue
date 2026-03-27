@@ -8,6 +8,7 @@ const form = ref({
   name: '',
   email: '',
   eventType: '',
+  description: '',
   guests: '',
   date: '',
   rooms: [] as string[],
@@ -119,7 +120,7 @@ async function onSubmit() {
                 </li>
                 <li>
                   <span class="sidebar-card__label">Horaires</span>
-                  <span class="sidebar-card__value">Lun – Ven : 8h00 – 17h00</span>
+                  <span class="sidebar-card__value">Lun – Ven : 8h00 – 16h00</span>
                 </li>
               </ul>
             </div>
@@ -181,6 +182,16 @@ async function onSubmit() {
               </div>
 
               <div class="form-row">
+                <div v-if="form.eventType === 'Autre'" class="form-group">
+                  <label for="email" class="form-label">Description de l'évènement</label>
+                  <input
+                    id="description"
+                    v-model="form.description"
+                    type="text"
+                    class="form-input"
+                    placeholder="Description de l'évènement"
+                  />
+                </div>
                 <div class="form-group">
                   <label for="date" class="form-label">Date de l'événement</label>
                   <input

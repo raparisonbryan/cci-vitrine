@@ -40,8 +40,8 @@ function goToSpace(slug: string) {
           <span class="hero__badge">Centre de Conférences International</span>
           <h1 class="hero__title">CCI Ivato</h1>
           <p class="hero__subtitle">
-            Un espace d'exception au cœur de Madagascar pour vos conférences, séminaires et
-            événements internationaux.
+            Un espace d'exception au cœur d’Antananarivo pour vos conférences, séminaires, sorties
+            de promotion, événements internationaux ou familiaux.
           </p>
           <div class="hero__actions">
             <AppButton href="/contact" variant="primary">
@@ -75,12 +75,12 @@ function goToSpace(slug: string) {
             Le Centre de Conférences International d'Ivato est un espace moderne et polyvalent,
             idéalement situé à proximité de l'aéroport international d'Antananarivo. Conçu pour
             accueillir des événements de toute envergure, il offre des infrastructures de premier
-            plan et un service irréprochable.
+            plan et un cadre adapté à chaque besoin.
           </p>
           <p class="about__detail">
             Que vous organisiez une conférence internationale, un séminaire d'entreprise ou une
-            réception privée, notre équipe vous accompagne à chaque étape pour faire de votre
-            événement une réussite.
+            réception privée, notre équipe vous accompagne pour faire de votre événement une
+            réussite.
           </p>
           <AppButton href="#services" variant="primary" style="margin-top: 24px">
             Voir nos espaces
@@ -114,8 +114,8 @@ function goToSpace(slug: string) {
           <span class="section-label">Nos espaces</span>
           <h2 class="section-title">Des espaces adaptés à chaque besoin</h2>
           <p class="section-subtitle">
-            Découvrez nos différents espaces et services pensés pour garantir le succès de vos
-            événements.
+            Découvrez nos différents espaces et nos différentes salles conçus pour garantir le
+            succès de vos événements.
           </p>
         </div>
 
@@ -138,7 +138,7 @@ function goToSpace(slug: string) {
             <div class="space-card__body">
               <span class="space-card__capacity">{{ space.card.rooms }}</span>
               <h3 class="space-card__title">{{ space.name }}</h3>
-              <p class="space-card__desc">{{ space.card.desc }}</p>
+              <p class="space-card__desc">{{ space.description }}</p>
               <span class="space-card__cta">Découvrir →</span>
             </div>
           </div>
@@ -180,7 +180,7 @@ function goToSpace(slug: string) {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background: url('https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773935153/CCI/cci_lfvega.png')
+  background: url('https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1774607112/CCI/hall-couloir/hall-entree-decor_tvuihd.jpg')
     center/cover no-repeat;
   overflow: hidden;
 }

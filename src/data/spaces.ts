@@ -26,7 +26,6 @@ export interface SpaceConfig {
   heroImage: string
   card: {
     rooms: string
-    desc: string
     image: string
   }
   rooms: SpaceRoom[]
@@ -39,12 +38,11 @@ export const spacesList: SpaceConfig[] = [
     name: 'Salles de conférence',
     badge: 'Salles de conférence',
     description:
-      "Des espaces grand format équipés pour vos conférences et événements d'envergure internationale.",
+      "Des salles équipées pour vos conférences et événements d'envergure internationale.",
     heroImage:
       'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934763/CCI/salles/amphi/amphi_2_raqzt5.jpg',
     card: {
       rooms: 'Amphithéâtre - Emeraude - Rubis - Cristal',
-      desc: "Un espace grand format pour vos conférences et événements d'envergure internationale.",
       image:
         'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934762/CCI/salles/amphi/amphi_1_txvun1.jpg',
     },
@@ -55,14 +53,27 @@ export const spacesList: SpaceConfig[] = [
         photos: [
           {
             id: 1,
-            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934763/CCI/salles/amphi/amphi_2_raqzt5.jpg',
-            alt: 'Amphithéâtre — Vue intérieure',
-            span: 'wide',
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1774607487/CCI/salles/amphi/amphitheatre-decor_zzgvm7.jpg',
+            alt: 'Amphithéâtre décoré',
+            span: 'large',
           },
           {
             id: 2,
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934763/CCI/salles/amphi/amphi_2_raqzt5.jpg',
+            alt: 'Amphithéâtre — Vue intérieure',
+            span: 'tall',
+          },
+          {
+            id: 3,
             src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934762/CCI/salles/amphi/amphi_1_txvun1.jpg',
             alt: 'Amphithéâtre — Scène',
+            span: 'tall',
+          },
+          {
+            id: 4,
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1774607487/CCI/salles/amphi/amphitheatre-decor-2_opet7u.jpg',
+            alt: 'Amphithéâtre décoré',
+            span: 'large',
           },
         ],
         specs: [
@@ -71,6 +82,7 @@ export const spacesList: SpaceConfig[] = [
           { icon: 'Ruler', title: '35,8 × 30,8 M', subtitle: 'dimension de la salle' },
           { icon: 'Ruler', title: '21,8 × 8,9 M', subtitle: "dimension de l'estrade" },
           { icon: 'Presentation', title: '194 M²', subtitle: "d'estrade" },
+          { icon: 'AirVent', title: 'Climatisation', subtitle: 'en option' },
         ],
       },
       {
@@ -103,15 +115,15 @@ export const spacesList: SpaceConfig[] = [
         label: 'Cristal',
         photos: [
           {
-            id: 3,
-            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934783/CCI/salles/cristal/cristal_2_o7thks.jpg',
+            id: 7,
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934782/CCI/salles/cristal/cristal_1_pgxc3g.jpg',
             alt: 'Cristal — Vue intérieure',
-            span: 'wide',
           },
           {
-            id: 4,
-            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934782/CCI/salles/cristal/cristal_1_pgxc3g.jpg',
+            id: 8,
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934783/CCI/salles/cristal/cristal_2_o7thks.jpg',
             alt: 'Cristal — Configuration',
+            span: 'wide',
           },
         ],
         specs: [
@@ -137,7 +149,6 @@ export const spacesList: SpaceConfig[] = [
       'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934486/CCI/hall-couloir/hall_4_roptwe.jpg',
     card: {
       rooms: 'Hall - Couloir',
-      desc: 'Un amphithéâtre moderne avec gradins et équipements audiovisuels de pointe.',
       image:
         'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934485/CCI/hall-couloir/hall_2_fkcvp2.jpg',
     },
@@ -147,35 +158,39 @@ export const spacesList: SpaceConfig[] = [
         label: 'Hall',
         photos: [
           {
-            id: 7,
-            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934486/CCI/hall-couloir/hall_4_roptwe.jpg',
-            alt: "Espace d'exposition — Podium",
-            span: 'wide',
-          },
-          {
-            id: 8,
-            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934485/CCI/hall-couloir/hall_1_a4affu.jpg',
-            alt: "Espace d'exposition — Hall",
-          },
-          {
             id: 9,
-            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934485/CCI/hall-couloir/hall_2_fkcvp2.jpg',
-            alt: "Espace d'exposition — Hall",
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1774607112/CCI/hall-couloir/hall-entree-decor_tvuihd.jpg',
+            alt: 'Entrée du hall décoré',
           },
           {
             id: 10,
-            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934485/CCI/hall-couloir/couloir_1_lrnpfl.jpg',
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934485/CCI/hall-couloir/couloir_2_kdhah8.jpg',
             alt: "Espace d'exposition — Couloir",
           },
           {
             id: 11,
-            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934485/CCI/hall-couloir/couloir_2_kdhah8.jpg',
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934485/CCI/hall-couloir/hall_1_a4affu.jpg',
+            alt: "Espace d'exposition — Hall",
+          },
+          {
+            id: 12,
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934486/CCI/hall-couloir/hall_4_roptwe.jpg',
+            alt: "Espace d'exposition — Podium",
+          },
+          {
+            id: 13,
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934485/CCI/hall-couloir/hall_2_fkcvp2.jpg',
+            alt: "Espace d'exposition — Hall",
+          },
+          {
+            id: 14,
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934485/CCI/hall-couloir/couloir_1_lrnpfl.jpg',
             alt: "Espace d'exposition — Couloir",
           },
         ],
         specs: [
-          { icon: 'Maximize2', title: '1 200 M²', subtitle: 'de surface' },
-          { icon: 'Users', title: '500+', subtitle: 'visiteurs max.' },
+          { icon: 'Maximize2', title: '645 M²', subtitle: 'de surface' },
+          { icon: 'Ruler', title: '41,4 × 15,6 M', subtitle: 'dimensions' },
           { icon: 'ArrowUpDown', title: '6 M', subtitle: 'hauteur sous plafond' },
           { icon: 'SlidersHorizontal', title: 'MODULABLE', subtitle: 'configuration' },
         ],
@@ -189,12 +204,11 @@ export const spacesList: SpaceConfig[] = [
     name: 'Salle de banquets',
     badge: 'Salle de banquets',
     description:
-      'La salle Plénière vous offre un cadre prestigieux pour vos banquets, galas et réceptions dans un espace élégant et raffiné.',
+      'La salle Plénière vous offre un cadre prestigieux pour vos banquets, galas et réceptions dans un espace élégant, raffiné et climatisé.',
     heroImage:
       'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934587/CCI/pleniere/pleniere_2_ei4bdq.jpg',
     card: {
-      rooms: 'Plenière',
-      desc: 'Des espaces modulables et équipés pour vos séminaires et réunions professionnelles.',
+      rooms: 'Plénière',
       image:
         'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934587/CCI/pleniere/pleniere_2_ei4bdq.jpg',
     },
@@ -204,27 +218,61 @@ export const spacesList: SpaceConfig[] = [
         label: 'Plénière',
         photos: [
           {
-            id: 12,
-            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934587/CCI/pleniere/pleniere_2_ei4bdq.jpg',
-            alt: 'Salle de banquets — Plénière',
+            id: 15,
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1774606646/CCI/pleniere/pleniere-mariage_fmsgbb.jpg',
+            alt: 'Plénière décorée pour un mariage',
             span: 'large',
           },
           {
-            id: 13,
+            id: 16,
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1774606637/CCI/pleniere/pleniere-entree-decor_fwtpuk.jpg',
+            alt: 'Entrée de la Plénière décorée',
+            span: 'tall',
+          },
+          {
+            id: 17,
             src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934588/CCI/pleniere/pleniere_4_i4c7ga.jpg',
             alt: 'Salle de banquets — Entrée Plénière',
             span: 'tall',
           },
           {
-            id: 14,
-            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934587/CCI/pleniere/pleniere_3_jmsclu.jpg',
-            alt: 'Salle de banquets — Couloir',
+            id: 18,
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934587/CCI/pleniere/pleniere_2_ei4bdq.jpg',
+            alt: 'Salle de banquets — Plénière',
+            span: 'large',
           },
           {
-            id: 15,
+            id: 19,
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934587/CCI/pleniere/pleniere_3_jmsclu.jpg',
+            alt: 'Salle de banquets — Couloir',
+            span: 'wide',
+          },
+          {
+            id: 20,
             src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934586/CCI/pleniere/pleniere_1_pygkqw.jpg',
             alt: 'Salle de banquets — Plénière',
+          },
+          {
+            id: 21,
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1774606637/CCI/pleniere/pleniere-mariage-2_usahwj.jpg',
+            alt: 'Plénière décorée pour un mariage',
+          },
+          {
+            id: 22,
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1774606637/CCI/pleniere/pleniere-decor-2_ihtmn2.jpg',
+            alt: 'Plénière décorée pour un congrès',
             span: 'wide',
+          },
+          {
+            id: 23,
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1774606637/CCI/pleniere/pleniere-decor_lhd8hi.jpg',
+            alt: 'Plénière décorée pour un congrès',
+            span: 'wide',
+          },
+          {
+            id: 24,
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1774606637/CCI/pleniere/pleniere-entree-decor-2_zkoe65.jpg',
+            alt: 'Entrée de la Plénière décorée',
           },
         ],
         specs: [
@@ -250,7 +298,6 @@ export const spacesList: SpaceConfig[] = [
       'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934817/CCI/saphir-grenat/saphir_1_bpvwhv.jpg',
     card: {
       rooms: 'Grenat - Saphir',
-      desc: 'De vastes espaces lumineux pour vos foires, expositions et salons professionnels.',
       image:
         'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934817/CCI/saphir-grenat/saphir_1_bpvwhv.jpg',
     },
@@ -260,10 +307,9 @@ export const spacesList: SpaceConfig[] = [
         label: 'Grenat',
         photos: [
           {
-            id: 16,
+            id: 25,
             src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934818/CCI/saphir-grenat/saphir_2_urn0ch.jpg',
             alt: 'Bureau Grenat — Vue intérieure',
-            span: 'wide',
           },
         ],
         specs: [
@@ -280,7 +326,7 @@ export const spacesList: SpaceConfig[] = [
         label: 'Saphir',
         photos: [
           {
-            id: 17,
+            id: 26,
             src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934817/CCI/saphir-grenat/saphir_1_bpvwhv.jpg',
             alt: 'Bureau Saphir — Vue intérieure',
             span: 'wide',
@@ -309,7 +355,6 @@ export const spacesList: SpaceConfig[] = [
       'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934688/CCI/restaurants/zenith/zenith_2_kgi2ua.jpg',
     card: {
       rooms: 'Zenith - Quartz',
-      desc: 'Un espace élégant en plein air pour vos cocktails, lancements de produits et soirées de gala.',
       image:
         'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934688/CCI/restaurants/zenith/zenith_2_kgi2ua.jpg',
     },
@@ -319,18 +364,17 @@ export const spacesList: SpaceConfig[] = [
         label: 'Zenith',
         photos: [
           {
-            id: 20,
+            id: 27,
             src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934689/CCI/restaurants/zenith/zenith_3_fxksoj.jpg',
             alt: 'Restaurant Zenith — Vue intérieure',
           },
           {
-            id: 21,
+            id: 28,
             src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934688/CCI/restaurants/zenith/zenith_2_kgi2ua.jpg',
             alt: 'Restaurant Zenith — Salle',
-            span: 'wide',
           },
           {
-            id: 22,
+            id: 29,
             src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934687/CCI/restaurants/zenith/zenith_1_idzz6p.jpg',
             alt: 'Restaurant Zenith — Terrasse',
           },
@@ -349,24 +393,21 @@ export const spacesList: SpaceConfig[] = [
         label: 'Quartz',
         photos: [
           {
-            id: 18,
+            id: 30,
             src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934649/CCI/restaurants/quartz/quartz_2_myjibc.jpg',
             alt: 'Restaurant Quartz — Vue intérieure',
             span: 'wide',
           },
           {
-            id: 19,
+            id: 31,
             src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934649/CCI/restaurants/quartz/quartz_1_gyzb2v.jpg',
             alt: 'Restaurant Quartz — Salle',
           },
         ],
         specs: [
-          { icon: 'Maximize2', title: '72 M²', subtitle: 'de surface' },
-          { icon: 'Users', title: '80 PLACES', subtitle: 'forme théâtre' },
-          { icon: 'Ruler', title: '11,1 × 6,5 M', subtitle: 'dimensions' },
-          { icon: 'Armchair', title: '30 PLACES', subtitle: 'forme U' },
-          { icon: 'LayoutGrid', title: '36 PLACES', subtitle: 'chaise + table' },
-          { icon: 'Sofa', title: 'LOUNGE', subtitle: 'type de salle' },
+          { icon: 'Maximize2', title: '209 M²', subtitle: 'de surface' },
+          { icon: 'Ruler', title: '15,6 × 13,4 M', subtitle: 'dimensions' },
+          { icon: 'Sofa', title: 'RESTAURANT', subtitle: 'type de salle' },
         ],
       },
     ],
@@ -375,52 +416,78 @@ export const spacesList: SpaceConfig[] = [
   // ─── Parking ───────────────────────────────────────────
   {
     slug: 'parking',
-    name: 'Parking',
-    badge: 'Parking sécurisé',
+    name: 'Parkings',
+    badge: 'Parkings intérieur - extérieur',
     description:
-      'Un vaste parking sécurisé à proximité immédiate du centre pour accueillir vos véhicules en toute sérénité.',
+      'Deux vastes parkings sécurisés à proximité immédiate du centre pour accueillir vos véhicules, des salons extérieurs, des foires et des expositions.',
     heroImage:
       'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934549/CCI/parking/parking_vide_2_qizwug.jpg',
     card: {
-      rooms: 'Parking',
-      desc: 'Un parking sécurisé pour vos véhicules.',
+      rooms: 'Parkings intérieur - extérieur',
       image:
         'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934549/CCI/parking/parking_vide_2_qizwug.jpg',
     },
     rooms: [
       {
-        key: 'parking',
-        label: 'Parking',
+        key: 'parking-interieur',
+        label: 'Parking intérieur',
         photos: [
           {
-            id: 23,
+            id: 32,
             src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934549/CCI/parking/parking_vide_2_qizwug.jpg',
-            alt: 'Parking — Vue aérienne',
-            span: 'large',
+            alt: 'Parking intérieur — Vue aérienne',
           },
           {
-            id: 24,
+            id: 33,
             src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934548/CCI/parking/parking_voiture_ctryvs.jpg',
-            alt: 'Parking — Stationnement',
-            span: 'tall',
+            alt: 'Parking intérieur — Stationnement',
           },
           {
-            id: 25,
+            id: 34,
             src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934546/CCI/parking/parking_drapeau_dmibyo.jpg',
-            alt: 'Parking — Drapeaux',
+            alt: 'Parking intérieur — Drapeaux',
+          },
+        ],
+        specs: [
+          { icon: 'Maximize2', title: '29 000 M²', subtitle: 'surface parking haut' },
+          { icon: 'Ruler', title: '20,6 × 14 M', subtitle: 'dimension parking haut' },
+          { icon: 'Maximize2', title: '3 800 M²', subtitle: 'surface parking bas' },
+          { icon: 'Ruler', title: '65,3 × 53,8 M', subtitle: 'dimension parking bas' },
+          { icon: 'Car', title: '700+', subtitle: 'places de parking' },
+          { icon: 'Shield', title: '24/7', subtitle: 'surveillance' },
+        ],
+      },
+      {
+        key: 'parking-exterieur',
+        label: 'Parking extérieur',
+        photos: [
+          {
+            id: 35,
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1774608717/CCI/parking/parking-exterieur_et9cnx.jpg',
+            alt: 'Parking extérieur — Vue CCI',
+            span: 'wide',
           },
           {
-            id: 26,
-            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1773934546/CCI/parking/parkin_decor_ftqdyh.jpg',
-            alt: 'Parking — Décoration',
+            id: 36,
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1774608717/CCI/parking/parking-exterieur-3_gbktuf.jpg',
+            alt: 'Parking extérieur — Vue CCI',
+          },
+          {
+            id: 37,
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1774608717/CCI/parking/parking-exterieur-2_owh5zp.jpg',
+            alt: 'Parking extérieur — Vue Route',
+          },
+          {
+            id: 38,
+            src: 'https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1774608717/CCI/parking/parking-exterieur-4_wo6yel.jpg',
+            alt: 'Parking extérieur — Vue Route',
             span: 'wide',
           },
         ],
         specs: [
-          { icon: 'Car', title: '500+', subtitle: 'places de parking' },
-          { icon: 'Shield', title: '24/7', subtitle: 'surveillance' },
-          { icon: 'Crown', title: '50', subtitle: 'places VIP' },
-          { icon: 'Lock', title: '100%', subtitle: 'sécurisé' },
+          { icon: 'Maximize2', title: '10 800 M²', subtitle: 'de surface' },
+          { icon: 'Ruler', title: '18,6 × 60 M', subtitle: 'dimensions' },
+          { icon: 'Car', title: '400+', subtitle: 'places de parking' },
         ],
       },
     ],

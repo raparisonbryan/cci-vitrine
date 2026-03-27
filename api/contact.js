@@ -15,11 +15,24 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const { name, email, eventType, guests, date, rooms, remarks } = req.body
+  const { name, email, eventType, description, guests, date, rooms, remarks } = req.body
 
   if (!name || !email || !eventType || !guests || !date) {
     return res.status(400).json({ error: 'Champs obligatoires manquants.' })
   }
+
+  if (eventType === 'Autre' && !String(description || '').trim()) {
+    return res.status(400).json({ error: 'Champs obligatoires manquants.' })
+  }
+
+  const descriptionRow =
+    eventType === 'Autre'
+      ? `
+      <tr>
+        <td style="padding:10px 14px;font-weight:bold;border-bottom:1px solid #e5e7eb">Description de l'événement</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #e5e7eb">${String(description).trim()}</td>
+      </tr>`
+      : ''
 
   const roomList =
     Array.isArray(rooms) && rooms.length
@@ -41,6 +54,7 @@ export default async function handler(req, res) {
         <td style="padding:10px 14px;font-weight:bold;border-bottom:1px solid #e5e7eb">Nature de l'événement</td>
         <td style="padding:10px 14px;border-bottom:1px solid #e5e7eb">${eventType}</td>
       </tr>
+      ${descriptionRow}
       <tr>
         <td style="padding:10px 14px;font-weight:bold;border-bottom:1px solid #e5e7eb">Nombre de personnes</td>
         <td style="padding:10px 14px;border-bottom:1px solid #e5e7eb">${guests}</td>

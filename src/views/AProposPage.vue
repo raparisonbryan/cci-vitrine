@@ -7,6 +7,7 @@ import {
   Plane,
   Hotel,
   Route,
+  Car,
   TrendingUp,
   MapPin,
   Calendar,
@@ -17,22 +18,22 @@ const spaces = [
   {
     icon: Building2,
     title: 'Salle plénière',
-    desc: 'Grande capacité pour conférences et sommets internationaux',
+    desc: "Grande capacité pour conférences, banquets d'exception, sorties de promotion et sommets internationaux",
   },
   {
     icon: Users,
     title: 'Amphithéâtre',
-    desc: 'Pour séminaires et présentations',
+    desc: 'Pour spectacles, sorties de promotion, concerts, conférences et présentations',
   },
   {
     icon: Building2,
     title: 'Salles de réunion',
-    desc: 'Pour ateliers et sessions parallèles',
+    desc: 'Pour ateliers, réunions professionnelles et sessions parallèles',
   },
   {
     icon: Globe,
     title: "Espaces d'exposition",
-    desc: 'Pour salons et forums',
+    desc: 'Pour salons, foires, expositions et forums',
   },
 ]
 
@@ -59,6 +60,11 @@ const commodites = [
     title: 'Rocades Est et Ouest',
     desc: 'Le CCI est proche des deux rocades Est et Ouest, qui relient rapidement le centre-ville et les principaux axes de circulation.',
   },
+  {
+    icon: Car,
+    title: 'Parking',
+    desc: 'Deux vastes parkings sécurisés à proximité immédiate du centre pour accueillir vos véhicules, des salons extérieurs, des foires et des expositions.',
+  },
 ]
 
 const ambitions = [
@@ -76,7 +82,10 @@ const ambitions = [
         <div class="gallery-hero__content" v-motion-fade>
           <span class="section-label">À propos</span>
           <h1 class="gallery-hero__title">Centre de Conférences International d'Ivato</h1>
-          <p class="gallery-hero__sub">Une infrastructure au service des grandes rencontres</p>
+          <p class="gallery-hero__sub">
+            Découvrez la mission du CCI, ses espaces et son rôle dans l'accueil d'événements majeurs
+            à Madagascar.
+          </p>
         </div>
       </div>
     </section>
@@ -508,7 +517,7 @@ const ambitions = [
 
 .apropos-commodites__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
 }
 
@@ -674,6 +683,10 @@ const ambitions = [
   .apropos-spaces__grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .apropos-commodites__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
@@ -689,7 +702,7 @@ const ambitions = [
   }
 
   .apropos-commodites__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .apropos-equipment__list {
@@ -705,6 +718,10 @@ const ambitions = [
 
 @media (max-width: 576px) {
   .apropos-spaces__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .apropos-commodites__grid {
     grid-template-columns: 1fr;
   }
 

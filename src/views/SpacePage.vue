@@ -21,6 +21,7 @@ import {
   Crown,
   Lock,
   Sofa,
+  AirVent,
 } from 'lucide-vue-next'
 import type { FunctionalComponent } from 'vue'
 import AppButton from '@/components/AppButton.vue'
@@ -40,6 +41,7 @@ const specIcons: Record<string, FunctionalComponent> = {
   Crown,
   Lock,
   Sofa,
+  AirVent,
 }
 
 const route = useRoute()
@@ -146,7 +148,7 @@ function navigateTo(path: string) {
           <div class="space-specs__left">
             <div class="space-specs__header" v-motion-fade>
               <span class="section-label">Fiche technique</span>
-              <h2 class="section-title">La salle en chiffres</h2>
+              <h2 class="section-title">L'espace en chiffres</h2>
             </div>
             <div class="space-specs__grid" v-motion-fade>
               <div
