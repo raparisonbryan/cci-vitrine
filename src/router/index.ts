@@ -5,6 +5,8 @@ import SpacePage from '@/views/SpacePage.vue'
 import { spaces } from '@/data/spaces'
 import AProposPage from '@/views/AProposPage.vue'
 import ContactPage from '@/views/ContactPage.vue'
+import MentionsLegalesPage from '@/views/MentionsLegalesPage.vue'
+import PolitiqueConfidentialitePage from '@/views/PolitiqueConfidentialitePage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +30,16 @@ const router = createRouter({
       path: '/contact',
       name: 'contact',
       component: ContactPage,
+    },
+    {
+      path: '/mentions-legales',
+      name: 'mentions-legales',
+      component: MentionsLegalesPage,
+    },
+    {
+      path: '/politique-confidentialite',
+      name: 'politique-confidentialite',
+      component: PolitiqueConfidentialitePage,
     },
     {
       path: '/espaces/:slug',

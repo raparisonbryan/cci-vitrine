@@ -20,8 +20,8 @@ const logos = [
 
 const stats = [
   { value: '6', label: "Types d'espaces" },
-  { value: '4', label: 'Salles de conférence' },
   { value: '500+', label: 'Événements accueillis' },
+  { value: '5 hectares', label: 'Surface totale' },
   { value: '5 minutes', label: "Distance de l'aéroport" },
 ]
 

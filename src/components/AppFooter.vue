@@ -65,7 +65,15 @@ const footerLinks = [
       </div>
 
       <div class="footer__bottom">
-        <p>&copy; {{ currentYear }} CCI Ivato. Tous droits réservés.</p>
+        <p>
+          &copy; {{ currentYear }} CCI Ivato. Tous droits réservés.
+          <span class="footer__legal-sep" aria-hidden="true">·</span>
+          <a href="/mentions-legales" class="footer__legal-link">Mentions légales</a>
+          <span class="footer__legal-sep" aria-hidden="true">·</span>
+          <a href="/politique-confidentialite" class="footer__legal-link"
+            >Politique de confidentialité</a
+          >
+        </p>
       </div>
     </div>
   </footer>
@@ -146,6 +154,19 @@ const footerLinks = [
 .footer__bottom p {
   font-size: var(--font-size-xs);
   color: rgba(255, 255, 255, 0.4);
+}
+
+.footer__legal-sep {
+  margin: 0 8px;
+  opacity: 0.6;
+}
+
+.footer__legal-link {
+  transition: color var(--transition);
+}
+
+.footer__legal-link:hover {
+  color: #fff;
 }
 
 @media (max-width: 1024px) {

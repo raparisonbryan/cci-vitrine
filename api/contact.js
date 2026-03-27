@@ -15,10 +15,17 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const { name, email, eventType, description, guests, date, rooms, remarks } = req.body
+  const { name, email, eventType, description, guests, date, rooms, remarks, privacyAccepted } =
+    req.body
 
   if (!name || !email || !eventType || !guests || !date) {
     return res.status(400).json({ error: 'Champs obligatoires manquants.' })
+  }
+
+  if (privacyAccepted !== true && privacyAccepted !== 'on') {
+    return res.status(400).json({
+      error: 'Vous devez accepter la politique de confidentialité pour envoyer votre demande.',
+    })
   }
 
   if (eventType === 'Autre' && !String(description || '').trim()) {

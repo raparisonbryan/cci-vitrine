@@ -13,6 +13,7 @@ const form = ref({
   date: '',
   rooms: [] as string[],
   remarks: '',
+  privacyAccepted: false,
 })
 
 const submitted = ref(false)
@@ -241,6 +242,24 @@ async function onSubmit() {
                 ></textarea>
               </div>
 
+              <div class="form-group form-group--full">
+                <label class="form-privacy">
+                  <input
+                    v-model="form.privacyAccepted"
+                    type="checkbox"
+                    class="form-privacy__input"
+                    required
+                  />
+                  <span class="form-privacy__text">
+                    J'accepte que les informations transmises soient utilisées uniquement pour
+                    traiter ma demande, conformément à la
+                    <a href="/politique-confidentialite" class="form-privacy__link" @click.stop
+                      >Politique de confidentialité</a
+                    >.
+                  </span>
+                </label>
+              </div>
+
               <p v-if="error" class="form-error">{{ error }}</p>
 
               <div class="form-actions">
@@ -366,6 +385,40 @@ async function onSubmit() {
 .form-textarea {
   resize: vertical;
   min-height: 120px;
+}
+
+.form-privacy {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.form-privacy__input {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.form-privacy__text {
+  flex: 1;
+}
+
+.form-privacy__link {
+  color: var(--color-primary);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.form-privacy__link:hover {
+  color: var(--color-primary-light);
 }
 
 .form-error {
