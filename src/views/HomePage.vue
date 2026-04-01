@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import AppButton from '@/components/AppButton.vue'
 import AppCta from '@/components/AppCta.vue'
@@ -8,15 +9,47 @@ import { Calendar, MoveDown } from 'lucide-vue-next'
 const router = useRouter()
 
 const logos = [
-  { abbr: 'UA', name: 'Union Africaine' },
-  { abbr: 'ONU', name: 'Nations Unies' },
-  { abbr: 'COLAS', name: 'Colas Madagascar' },
-  { abbr: 'BNI', name: 'BNI Madagascar' },
-  { abbr: 'AIR', name: 'Air Madagascar' },
-  { abbr: 'OMNIS', name: 'OMNIS' },
-  { abbr: 'OIF', name: 'Francophonie' },
-  { abbr: 'AXIAN', name: 'Axian Group' },
+  { abbr: 'UPRIM', name: 'UPRIM' },
+  { abbr: 'ISM', name: 'ISM ADVANCEA' },
+  { abbr: 'ESCAME', name: 'ESCAME' },
+  { abbr: 'ISCAM', name: 'ISCAM' },
+  { abbr: 'INSCAE', name: 'INSCAE' },
+  { abbr: 'LCF', name: 'LA CLAIREFONTAINE' },
+  { abbr: 'MPTC', name: 'MPTC' },
+  { abbr: 'LS', name: 'LES SCTROUMPFS' },
+  { abbr: 'INSP', name: 'INSPMAD' },
+  { abbr: 'INTH', name: 'INTH' },
+  { abbr: 'LC', name: 'LES CRISTALLINES' },
+  { abbr: 'ACA', name: 'ACACIA' },
+  { abbr: 'KANG', name: 'KANGOUROU' },
+  { abbr: 'CAL', name: 'CALINE' },
+  { abbr: 'LV', name: 'LA VALEE' },
+  { abbr: 'EPE', name: 'EPEPSAA' },
+  { abbr: 'CFPM', name: 'CFPM' },
+  { abbr: 'URV', name: 'Université RAVELOJAONA' },
+  { abbr: 'UACE', name: 'Université ACEEM' },
+  { abbr: 'ESTI', name: 'ESTIIM' },
+  { abbr: 'ONTM', name: 'ONTM/ITM' },
+  { abbr: 'MADV', name: 'MADAVISION' },
+  { abbr: 'GCAM', name: 'GCAM' },
+  { abbr: 'BOA', name: 'Banque BOA' },
+  { abbr: 'STAR', name: 'STAR' },
+  { abbr: 'DGI', name: 'DGI' },
+  { abbr: 'DGD', name: 'DGD' },
+  { abbr: 'ARO', name: 'Assurance Aro' },
+  { abbr: 'HAZ', name: 'Association Hazavana' },
+  { abbr: 'BD', name: 'Blastin Dance' },
+  { abbr: 'PF', name: 'Pasteur Fidisoa' },
+  { abbr: 'LOV', name: 'LOUVTO Compagnie' },
+  { abbr: 'OKA', name: 'OKALOU' },
+  { abbr: 'FDR', name: 'Fée de rêves' },
+  { abbr: 'PE', name: 'POLKA EVENT' },
+  { abbr: 'IVEN', name: 'IVENCO' },
+  { abbr: 'CC', name: 'COOL CONCEPT' },
+  { abbr: 'RDJ', name: 'RDJ' },
 ]
+
+const logosMarquee = computed(() => [...logos, ...logos])
 
 const stats = [
   { value: '6', label: "Types d'espaces" },
@@ -155,11 +188,7 @@ function goToSpace(slug: string) {
         </div>
         <div class="trusted__marquee" v-motion-fade="{ delay: 0.2 }">
           <div class="trusted__track">
-            <div
-              v-for="logo in [...logos, ...logos]"
-              :key="logo.name + Math.random()"
-              class="trusted__logo"
-            >
+            <div v-for="(logo, i) in logosMarquee" :key="`${logo.name}-${i}`" class="trusted__logo">
               <span class="trusted__logo-abbr">{{ logo.abbr }}</span>
               <span class="trusted__logo-name">{{ logo.name }}</span>
             </div>
@@ -180,7 +209,7 @@ function goToSpace(slug: string) {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background: url('https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1774607112/CCI/hall-couloir/hall-entree-decor_tvuihd.jpg')
+  background: url('https://res.cloudinary.com/dwwjauice/image/upload/w_1440,c_limit,f_auto,q_auto/v1775039584/CCI/hall-couloir/hall-entree-decor_nqta0o.png')
     center/cover no-repeat;
   overflow: hidden;
 }
@@ -500,7 +529,7 @@ function goToSpace(slug: string) {
   display: flex;
   gap: 16px;
   width: max-content;
-  animation: marquee 28s linear infinite;
+  animation: marquee 55s linear infinite;
 }
 
 .trusted__marquee:hover .trusted__track {
