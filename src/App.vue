@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import AppNavbar from '@/components/AppNavbar.vue'
 import AppFooter from '@/components/AppFooter.vue'
+import AppSeo from '@/components/AppSeo.vue'
 import SplashScreen from '@/components/SplashScreen.vue'
 
 const route = useRoute()
@@ -12,6 +13,7 @@ const showSplash = computed(() => route.path === '/' && !splashDone.value)
 </script>
 
 <template>
+  <AppSeo />
   <SplashScreen v-if="showSplash" @complete="splashDone = true" />
   <template v-else>
     <AppNavbar />
