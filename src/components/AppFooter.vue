@@ -9,6 +9,7 @@ const footerLinks = [
       { label: 'À propos', href: '#about' },
       { label: 'Galerie', href: '/galerie' },
       { label: 'Reserver', href: '#contact' },
+      { label: 'Informations', href: '/informations' },
     ],
   },
   {

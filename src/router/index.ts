@@ -6,6 +6,7 @@ import { spaces } from '@/data/spaces'
 import AProposPage from '@/views/AProposPage.vue'
 import ContactPage from '@/views/ContactPage.vue'
 import MentionsLegalesPage from '@/views/MentionsLegalesPage.vue'
+import InformationsPage from '@/views/InformationsPage.vue'
 import PolitiqueConfidentialitePage from '@/views/PolitiqueConfidentialitePage.vue'
 
 const router = createRouter({
@@ -35,6 +36,11 @@ const router = createRouter({
       path: '/mentions-legales',
       name: 'mentions-legales',
       component: MentionsLegalesPage,
+    },
+    {
+      path: '/informations',
+      name: 'informations',
+      component: InformationsPage,
     },
     {
       path: '/politique-confidentialite',
