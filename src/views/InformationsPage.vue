@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { ChevronLeft, ChevronRight } from 'lucide-vue-next'
-import { documentsFinanciers, appelsOffre } from '@/data/informations'
+import { documents, appelsOffre } from '@/data/informations'
 import type { FinancialDocument } from '@/data/informations'
 
-type TabKey = 'financiers' | 'appels-offre'
+type TabKey = 'documents' | 'appels-offre'
 
 const tabs = [
-  { key: 'financiers' as const, label: 'Documents financiers' },
+  { key: 'documents' as const, label: 'Documents' },
   { key: 'appels-offre' as const, label: "Appels d'offre" },
 ]
 
-const activeTab = ref<TabKey>('financiers')
+const activeTab = ref<TabKey>('documents')
 
 const filtersListRef = ref<HTMLDivElement | null>(null)
 
@@ -21,27 +21,27 @@ function scrollFilters(dir: 1 | -1) {
   el.scrollBy({ left: dir * 220, behavior: 'smooth' })
 }
 
-const currentDocs = computed(() =>
-  activeTab.value === 'financiers' ? documentsFinanciers : appelsOffre,
-)
-
-const financiersByYear = computed(() => {
+function groupFinancialDocsByYear(docs: FinancialDocument[]) {
   const byYear = new Map<number, FinancialDocument[]>()
-  for (const doc of documentsFinanciers) {
+  for (const doc of docs) {
     const list = byYear.get(doc.year) ?? []
     list.push(doc)
     byYear.set(doc.year, list)
   }
-  for (const docs of byYear.values()) {
-    docs.sort((a, b) => a.label.localeCompare(b.label, 'fr'))
+  for (const list of byYear.values()) {
+    list.sort((a, b) => a.label.localeCompare(b.label, 'fr'))
   }
   return [...byYear.keys()].sort((a, b) => b - a).map((year) => ({ year, docs: byYear.get(year)! }))
-})
+}
+
+const documentsByYear = computed(() => groupFinancialDocsByYear(documents))
+
+const currentDocs = computed(() => (activeTab.value === 'documents' ? documents : appelsOffre))
 
 const isEmpty = computed(() => currentDocs.value.length === 0)
 
 const emptyMessage = computed(() =>
-  activeTab.value === 'financiers'
+  activeTab.value === 'documents'
     ? "Aucun document n'est publié pour le moment."
     : "Aucun appel d'offre n'est publié pour le moment.",
 )
@@ -55,8 +55,8 @@ const emptyMessage = computed(() =>
           <span class="section-label">Transparence</span>
           <h1 class="gallery-hero__title">Informations</h1>
           <p class="gallery-hero__sub">
-            Consultez les documents financiers et les appels d'offre publiés par le Centre de
-            Conférences International d'Ivato.
+            Consultez les documents et les appels d'offre publiés par le Centre de Conférences
+            International d'Ivato.
           </p>
         </div>
       </div>
@@ -113,9 +113,9 @@ const emptyMessage = computed(() =>
             {{ emptyMessage }}
           </p>
 
-          <template v-else-if="activeTab === 'financiers'">
+          <template v-else-if="activeTab === 'documents'">
             <section
-              v-for="group in financiersByYear"
+              v-for="group in documentsByYear"
               :key="group.year"
               class="doc-year-group"
               :aria-labelledby="`year-heading-${group.year}`"
@@ -349,6 +349,7 @@ const emptyMessage = computed(() =>
   text-underline-offset: 2px;
   flex: 1 1 200px;
   min-width: 0;
+  cursor: pointer;
 }
 
 .doc-list__link:hover {
