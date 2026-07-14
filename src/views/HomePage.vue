@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router'
 import AppButton from '@/components/AppButton.vue'
 import AppCta from '@/components/AppCta.vue'
 import { spacesList } from '@/data/spaces'
-import { Calendar, MoveDown } from 'lucide-vue-next'
+import { Calendar, MoveDown, DollarSign } from 'lucide-vue-next'
 
 const router = useRouter()
 
@@ -118,6 +118,15 @@ function goToSpace(slug: string) {
           <AppButton href="#services" variant="primary" style="margin-top: 24px">
             Voir nos espaces
             <MoveDown class="icon" />
+          </AppButton>
+          <AppButton
+            href="https://zlsrehitdajhqraprziz.supabase.co/storage/v1/object/sign/documents/Tarifs%20locations%20salles%20CCI-A4-2026.pdf?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV81MWFlOWIwZS1iNDA4LTQ5NDQtYjllNC1iZWNkZTk5MWY4MTUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJkb2N1bWVudHMvVGFyaWZzIGxvY2F0aW9ucyBzYWxsZXMgQ0NJLUE0LTIwMjYucGRmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4NDAzNTU4NiwiZXhwIjoxODE1NTcxNTg2fQ.JRchi2rBHpXpmwyMMFs_-HNYgrm5ozE333YPz0-7w10"
+            variant="secondary"
+            target="_blank"
+            style="margin-top: 24px; margin-left: 16px"
+          >
+            Tarifs
+            <DollarSign class="icon" />
           </AppButton>
         </div>
       </div>
