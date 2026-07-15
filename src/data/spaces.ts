@@ -77,6 +77,7 @@ export const spacesList: SpaceConfig[] = [
           },
         ],
         specs: [
+          { icon: 'DollarSign', title: '4 200 000 ar', subtitle: 'tarif' },
           { icon: 'Maximize2', title: '1 103 M²', subtitle: 'de surface' },
           { icon: 'Users', title: '1 070 PLACES', subtitle: 'forme théâtre' },
           { icon: 'Ruler', title: '35,8 × 30,8 M', subtitle: 'dimension de la salle' },
@@ -102,6 +103,7 @@ export const spacesList: SpaceConfig[] = [
           },
         ],
         specs: [
+          { icon: 'DollarSign', title: '1 500 000 ar', subtitle: 'tarif' },
           { icon: 'Maximize2', title: '189 M²', subtitle: 'par salle' },
           { icon: 'Users', title: '150 PLACES', subtitle: 'forme théâtre' },
           { icon: 'Ruler', title: '14 × 13,5 M', subtitle: 'dimensions' },
@@ -127,6 +129,7 @@ export const spacesList: SpaceConfig[] = [
           },
         ],
         specs: [
+          { icon: 'DollarSign', title: '1 920 000 ar', subtitle: 'tarif' },
           { icon: 'Maximize2', title: '288 M²', subtitle: 'de surface' },
           { icon: 'Users', title: '250 PLACES', subtitle: 'forme théâtre' },
           { icon: 'Ruler', title: '20,6 × 14 M', subtitle: 'dimensions' },
@@ -196,6 +199,7 @@ export const spacesList: SpaceConfig[] = [
           },
         ],
         specs: [
+          { icon: 'DollarSign', title: '3 000 000 ar', subtitle: 'tarif' },
           { icon: 'Maximize2', title: '645 M²', subtitle: 'de surface' },
           { icon: 'Ruler', title: '41,4 × 15,6 M', subtitle: 'dimensions' },
           { icon: 'ArrowUpDown', title: '6 M', subtitle: 'hauteur sous plafond' },
@@ -287,6 +291,7 @@ export const spacesList: SpaceConfig[] = [
           },
         ],
         specs: [
+          { icon: 'DollarSign', title: '5 700 000 ar', subtitle: 'tarif' },
           { icon: 'Maximize2', title: '1 000 M²', subtitle: 'de surface' },
           { icon: 'Users', title: '1 500 PLACES', subtitle: 'forme théâtre' },
           { icon: 'Ruler', title: '50 × 20 M', subtitle: 'dimensions' },
@@ -324,6 +329,7 @@ export const spacesList: SpaceConfig[] = [
           },
         ],
         specs: [
+          { icon: 'DollarSign', title: '600 000 ar', subtitle: 'tarif' },
           { icon: 'Maximize2', title: '58,5 M²', subtitle: 'de surface' },
           { icon: 'Users', title: '60 PLACES', subtitle: 'forme théâtre' },
           { icon: 'Ruler', title: '9 × 6,5 M', subtitle: 'dimensions' },
@@ -344,6 +350,7 @@ export const spacesList: SpaceConfig[] = [
           },
         ],
         specs: [
+          { icon: 'DollarSign', title: '600 000 ar', subtitle: 'tarif' },
           { icon: 'Maximize2', title: '72 M²', subtitle: 'de surface' },
           { icon: 'Users', title: '80 PLACES', subtitle: 'forme théâtre' },
           { icon: 'Ruler', title: '11,1 × 6,5 M', subtitle: 'dimensions' },
@@ -402,6 +409,7 @@ export const spacesList: SpaceConfig[] = [
           },
         ],
         specs: [
+          { icon: 'DollarSign', title: '3 000 000 ar', subtitle: 'tarif' },
           { icon: 'Maximize2', title: '721 M²', subtitle: 'de surface' },
           { icon: 'Users', title: '150 PLACES', subtitle: 'forme théâtre' },
           { icon: 'Ruler', title: '30,7 × 23,5 M', subtitle: 'dimensions' },
@@ -427,6 +435,7 @@ export const spacesList: SpaceConfig[] = [
           },
         ],
         specs: [
+          { icon: 'DollarSign', title: '2 000 000 ar', subtitle: 'tarif' },
           { icon: 'Maximize2', title: '209 M²', subtitle: 'de surface' },
           { icon: 'Ruler', title: '15,6 × 13,4 M', subtitle: 'dimensions' },
           { icon: 'Sofa', title: 'RESTAURANT', subtitle: 'type de salle' },
@@ -478,6 +487,7 @@ export const spacesList: SpaceConfig[] = [
           },
         ],
         specs: [
+          { icon: 'DollarSign', title: '5 200 000 ar', subtitle: 'tarif (sous conditions)' },
           { icon: 'Maximize2', title: '29 000 M²', subtitle: 'surface parking haut' },
           { icon: 'Ruler', title: '20,6 × 14 M', subtitle: 'dimension parking haut' },
           { icon: 'Maximize2', title: '3 800 M²', subtitle: 'surface parking bas' },
@@ -514,6 +524,7 @@ export const spacesList: SpaceConfig[] = [
           },
         ],
         specs: [
+          { icon: 'DollarSign', title: '1 000 000 ar', subtitle: 'tarif' },
           { icon: 'Maximize2', title: '10 800 M²', subtitle: 'de surface' },
           { icon: 'Ruler', title: '18,6 × 60 M', subtitle: 'dimensions' },
           { icon: 'Car', title: '400+', subtitle: 'places de parking' },

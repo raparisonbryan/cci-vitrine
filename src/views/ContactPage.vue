@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import { Send, CheckCircle } from 'lucide-vue-next'
 import AppButton from '@/components/AppButton.vue'
 import { spacesList } from '@/data/spaces'
+import { DollarSign } from 'lucide-vue-next'
 
 const form = ref({
   name: '',
@@ -122,6 +123,17 @@ async function onSubmit() {
                 <li>
                   <span class="sidebar-card__label">Horaires</span>
                   <span class="sidebar-card__value">Lun – Ven : 8h00 – 16h00</span>
+                </li>
+                <li>
+                  <AppButton
+                    href="https://zlsrehitdajhqraprziz.supabase.co/storage/v1/object/sign/documents/Tarifs%20locations%20salles%20CCI-A4-2026.pdf?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV81MWFlOWIwZS1iNDA4LTQ5NDQtYjllNC1iZWNkZTk5MWY4MTUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJkb2N1bWVudHMvVGFyaWZzIGxvY2F0aW9ucyBzYWxsZXMgQ0NJLUE0LTIwMjYucGRmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc4NDAzNTU4NiwiZXhwIjoxODE1NTcxNTg2fQ.JRchi2rBHpXpmwyMMFs_-HNYgrm5ozE333YPz0-7w10"
+                    variant="secondary"
+                    target="_blank"
+                    style="width: 100%"
+                  >
+                    Tarifs
+                    <DollarSign class="icon" />
+                  </AppButton>
                 </li>
               </ul>
             </div>

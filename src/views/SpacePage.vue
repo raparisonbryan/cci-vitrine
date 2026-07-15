@@ -22,12 +22,14 @@ import {
   Lock,
   Sofa,
   AirVent,
+  DollarSign,
 } from 'lucide-vue-next'
 import type { FunctionalComponent } from 'vue'
 import AppButton from '@/components/AppButton.vue'
 import { spaces, type SpacePhoto } from '@/data/spaces'
 
 const specIcons: Record<string, FunctionalComponent> = {
+  DollarSign,
   Maximize2,
   Users,
   Ruler,
